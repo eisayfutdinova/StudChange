@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Анкета пользователя" />
+        <item
+            android:id="@+id/nav_liked"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Сохраненное" />
+        <item
+            android:id="@+id/nav_request"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Поданные заявки" />
+        <item
+            android:id="@+id/nav_exchange_list"
+            android:title="Стажировки" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Настройки" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Поделиться" />
+
+        </menu>
+    </item>
+
+</menu>
+

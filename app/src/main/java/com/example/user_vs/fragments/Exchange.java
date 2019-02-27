@@ -1,31 +1,34 @@
 package com.example.user_vs.fragments;
 
 public class Exchange {
-    private int id;
-    private String title;
-    private String shortdesc;
-    private String image;
+    private String univercityName;
+    private String educationalProgram;
+    private String country;
+    private String language;
 
-    public Exchange(int id, String title, String shortdesc, String image) {
-        this.id = id;
-        this.title = title;
-        this.shortdesc = shortdesc;
-        this.image = image;
+    public Exchange(){}
+
+    public Exchange(String univercity,String educationalProgram,String country, String language) {
+        this.univercityName = univercity;
+        this.educationalProgram = educationalProgram;
+        this.country = country;
+        this.language = language;
     }
 
-    public int getId() {
-        return id;
+    public String getUnivercityName() {
+        return univercityName;
     }
 
-    public String getTitle() {
-        return title;
+    public String getEducationalProgram()
+    {
+        return educationalProgram;
     }
 
-    public String getShortdesc() {
-        return shortdesc;
+    public String getCountry() {
+        return country;
     }
 
-    public String getImage() {
-        return image;
+    public String getLanguage() {
+        return language;
     }
 }

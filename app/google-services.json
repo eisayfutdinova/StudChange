@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "186079707693",
+    "firebase_url": "https://studchange-137ae.firebaseio.com",
+    "project_id": "studchange-137ae",
+    "storage_bucket": "studchange-137ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:186079707693:android:17a5d96face145b9",
+        "android_client_info": {
+          "package_name": "com.example.user_vs.fragments"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "186079707693-gnu0m2v6si78m4nbbv06hga9u3nbtuqe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjHguRALloO3NUh_XQfoqxPzsDavxImX8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

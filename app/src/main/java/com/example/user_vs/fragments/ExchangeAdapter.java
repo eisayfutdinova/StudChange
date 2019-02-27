@@ -26,6 +26,8 @@ public class ExchangeAdapter extends RecyclerView.Adapter<ExchangeAdapter.Produc
         this.productList = productList;
     }
 
+
+
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //inflating and returning our view holder
@@ -40,9 +42,9 @@ public class ExchangeAdapter extends RecyclerView.Adapter<ExchangeAdapter.Produc
         Exchange product = productList.get(position);
 
         //binding the data with the viewholder views
-        holder.textViewTitle.setText(product.getTitle());
-        holder.textViewShortDesc.setText(product.getShortdesc());
-        Glide.with(mCtx).load(product.getImage()).into(holder.imageView);
+        holder.textViewTitle.setText(product.getUnivercityName());
+        holder.textViewShortDesc.setText(product.getCountry());
+        holder.textViewPrice.setText(product.getEducationalProgram());
     }
 
 

@@ -7,12 +7,22 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -20,6 +30,7 @@ import java.util.List;
  */
 public class ExchangeRecyclerListFragment extends Fragment {
 
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public ExchangeRecyclerListFragment() {
         // Required empty public constructor
@@ -38,7 +49,17 @@ public class ExchangeRecyclerListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         //a list to store all the exchanges
-        List<Exchange> exchangeList;
+        List<Exchange> exchangeList = new ArrayList<>();
+      //  Exchange exchange = new Exchange("ВШЭ", "Программная инженерия","Россия", "русский");
+
+/*
+// Add a new document with a generated ID
+        db.collection("exchange")
+                .add(exchange)
+                .addOnSuccessListener(documentReference -> Log.w(getActivity().getPackageName(), documentReference.getId()))
+                .addOnFailureListener(e -> Log.w(getActivity().getPackageName(), "Cannot add data"));
+
+*/
 
         //the recyclerview
         RecyclerView recyclerView;
@@ -46,33 +67,21 @@ public class ExchangeRecyclerListFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        //initializing the productlist
-        exchangeList = new ArrayList<>();
-//adding some items to our list
-        exchangeList.add(
-                new Exchange(
-                        1,
-                        "UK",
-                        "blablabla",
-                        "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwio-sjwhrLgAhVSmIsKHbSIAp8QjRx6BAgBEAU&url=https%3A%2F%2Fhitech.vesti.ru%2Farticle%2F1083626%2F&psig=AOvVaw1wQ3qaQy63MStwNwCG36A4&ust=1549918603789024"));
-        exchangeList.add(
-                new Exchange(
-                        1,
-                        "USA",
-                        "blablabla",
-                        "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwj84uzKh7LgAhUDx4sKHYOAAHwQjRx6BAgBEAU&url=http%3A%2F%2Forient-dv.ru%2F15-interesnyh-faktov-o-ssha%2F&psig=AOvVaw3gsUQHR1Tl7NamGfOiLSo9&ust=1549918788583543"));
-
-        exchangeList.add(
-                new Exchange(
-                        1,
-                        "Russia",
-                        "blablabla",
-                        "https://www.google.com/imgres?imgurl=http%3A%2F%2Frisovach.ru%2Fupload%2F2016%2F11%2Fmem%2Feto--rasha-na_129820662_orig_.jpg&imgrefurl=http%3A%2F%2Frisovach.ru%2Fmemy%2Feto--rasha-na_476%2Fall%2F2&docid=FB_pgsdzG80gIM&tbnid=Sdh7gyLbhKGVIM%3A&vet=10ahUKEwjQho_ah7LgAhUJwcQBHSFDBI8QMwg6KAMwAw..i&w=576&h=533&bih=610&biw=1280&q=%D1%80%D0%B0%D1%88%D0%B0&ved=0ahUKEwjQho_ah7LgAhUJwcQBHSFDBI8QMwg6KAMwAw&iact=mrc&uact=8"));
 
         //creating recyclerview adapter
         ExchangeAdapter adapter = new ExchangeAdapter(getContext(), exchangeList);
 
-        //setting adapter to recyclerview
-        recyclerView.setAdapter(adapter);
+
+        db.collection("exchange")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    exchangeList.addAll(queryDocumentSnapshots.toObjects(Exchange.class));
+
+                    //setting adapter to recyclerview
+                    recyclerView.setAdapter(adapter);
+                })
+                .addOnFailureListener(e -> Log.w(getActivity().getPackageName(), "Cannot get"));
+
+
     }
 }

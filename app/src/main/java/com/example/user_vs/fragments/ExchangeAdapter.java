@@ -1,6 +1,8 @@
 package com.example.user_vs.fragments;
 
 import android.content.Context;
+
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,8 +47,16 @@ public class ExchangeAdapter extends RecyclerView.Adapter<ExchangeAdapter.Produc
         holder.textViewTitle.setText(product.getUnivercityName());
         holder.textViewShortDesc.setText(product.getCountry());
         holder.textViewPrice.setText(product.getEducationalProgram());
+        holder.exid.setText(product.getExchangeId());
+        holder.itemView.setOnClickListener(v -> {
+            DetailsExchangeFragment detailsExchangeFragment = DetailsExchangeFragment.newInstance(product.getExchangeId());
+            ((MainActivity)mCtx).getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content_frame, detailsExchangeFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
     }
-
 
     @Override
     public int getItemCount() {
@@ -56,8 +66,8 @@ public class ExchangeAdapter extends RecyclerView.Adapter<ExchangeAdapter.Produc
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewTitle, textViewShortDesc, textViewRating, textViewPrice;
-        ImageView imageView;
+        TextView textViewTitle, textViewShortDesc, textViewPrice;
+        TextView exid;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
@@ -65,7 +75,7 @@ public class ExchangeAdapter extends RecyclerView.Adapter<ExchangeAdapter.Produc
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
             textViewShortDesc = itemView.findViewById(R.id.textViewShortDesc);
             textViewPrice = itemView.findViewById(R.id.textViewPrice);
-            imageView = itemView.findViewById(R.id.imageView);
+            exid = itemView.findViewById(R.id.exid);
         }
     }
 }

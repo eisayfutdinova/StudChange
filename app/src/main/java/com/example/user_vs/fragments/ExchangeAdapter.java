@@ -34,7 +34,7 @@ public class ExchangeAdapter extends RecyclerView.Adapter<ExchangeAdapter.Produc
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //inflating and returning our view holder
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.recycler_products, null);
+        View view = inflater.inflate(R.layout.recycler_products, parent, false);
         return new ProductViewHolder(view);
     }
 
@@ -47,7 +47,6 @@ public class ExchangeAdapter extends RecyclerView.Adapter<ExchangeAdapter.Produc
         holder.textViewTitle.setText(product.getUnivercityName());
         holder.textViewShortDesc.setText(product.getCountry());
         holder.textViewPrice.setText(product.getEducationalProgram());
-        holder.exid.setText(product.getExchangeId());
         holder.itemView.setOnClickListener(v -> {
             DetailsExchangeFragment detailsExchangeFragment = DetailsExchangeFragment.newInstance(product.getExchangeId());
             ((MainActivity)mCtx).getSupportFragmentManager()
@@ -67,7 +66,6 @@ public class ExchangeAdapter extends RecyclerView.Adapter<ExchangeAdapter.Produc
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewTitle, textViewShortDesc, textViewPrice;
-        TextView exid;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
@@ -75,7 +73,6 @@ public class ExchangeAdapter extends RecyclerView.Adapter<ExchangeAdapter.Produc
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
             textViewShortDesc = itemView.findViewById(R.id.textViewShortDesc);
             textViewPrice = itemView.findViewById(R.id.textViewPrice);
-            exid = itemView.findViewById(R.id.exid);
         }
     }
 }

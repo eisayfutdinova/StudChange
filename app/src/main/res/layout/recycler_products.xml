@@ -3,10 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginBottom="10dp">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp">
 
     <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -15,25 +17,29 @@
             android:id="@+id/textViewPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:textSize="22sp"
+            android:textStyle="bold"
             tools:text="Univer" />
 
         <TextView
             android:id="@+id/textViewTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="информация о стажировке"/>
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:textSize="16sp"
+            tools:text="информация о стажировке"/>
 
         <TextView
             android:id="@+id/textViewShortDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="страна стажировки"/>
-
-        <TextView
-            android:id="@+id/exid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="id"/>
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:textSize="18sp"
+            tools:text="страна стажировки"/>
 
     </LinearLayout>
 

@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,8 +46,10 @@ public class RegisterFragment extends Fragment {
     private EditText userEmail, userPassword, userPassword2, userName;
     private ProgressBar loadingProgress;
     private Button regButton;
+    private TextView regLogin;
 
     private FirebaseAuth fbAuth;
+
     public RegisterFragment() {
         // Required empty public constructor
     }
@@ -63,6 +66,7 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        regLogin = view.findViewById(R.id.reg_sign_in);
         userEmail = view.findViewById(R.id.reg_mail);
         userPassword = view.findViewById(R.id.reg_password);
         userPassword2 = view.findViewById(R.id.reg_confirm);
@@ -70,7 +74,7 @@ public class RegisterFragment extends Fragment {
         loadingProgress = view.findViewById(R.id.reg_progressBar);
         regButton = view.findViewById(R.id.reg_button);
         loadingProgress.setVisibility(View.INVISIBLE);
-        pickedImgUri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" +R.drawable.registration);
+        pickedImgUri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.drawable.registration);
         fbAuth = FirebaseAuth.getInstance();
 
         regButton.setOnClickListener(v -> {
@@ -91,6 +95,13 @@ public class RegisterFragment extends Fragment {
                 //creating users acount
                 CreateUserAccount(email, name, password);
             }
+        });
+
+        regLogin.setOnClickListener(v -> {
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.auth_frame, new LogInFragment())
+                    .commit();
         });
 
 

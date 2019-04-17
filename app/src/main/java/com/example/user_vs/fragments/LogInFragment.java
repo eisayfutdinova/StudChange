@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,6 +33,7 @@ public class LogInFragment extends Fragment {
     private EditText userEmail, userPassword;
     private ProgressBar loadingProgress;
     private Button loginButton;
+    private TextView logRegister;
 
     private FirebaseAuth fbAuth;
 
@@ -56,6 +58,7 @@ public class LogInFragment extends Fragment {
         userPassword = view.findViewById(R.id.login_password);
         loadingProgress = view.findViewById(R.id.login_progressBar);
         loginButton = view.findViewById(R.id.login_button);
+        logRegister = view.findViewById(R.id.log_register);
 
         fbAuth = FirebaseAuth.getInstance();
         MainActivity = new Intent(getContext(),MainActivity.class);
@@ -78,6 +81,12 @@ public class LogInFragment extends Fragment {
 
         });
 
+        logRegister.setOnClickListener(v ->{
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.auth_frame, new RegisterFragment())
+                    .commit();
+        });
     }
 
     private void CheckAccount(String email, String password) {

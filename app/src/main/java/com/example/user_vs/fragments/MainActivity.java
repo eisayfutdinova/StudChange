@@ -1,5 +1,6 @@
 package com.example.user_vs.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,11 +47,12 @@ public class MainActivity extends AppCompatActivity
 
         View navViewHeader = navigationView.getHeaderView(0);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         TextView userName = navViewHeader.findViewById(R.id.userName);
         TextView userMail = navViewHeader.findViewById(R.id.userMail);
         ImageView userPhoto = navViewHeader.findViewById(R.id.userPhoto);
 
-        if(user.getPhotoUrl() != null)
+        if (user.getPhotoUrl() != null)
             Glide.with(this).load(user.getPhotoUrl()).into(userPhoto);
 
         userName.setText(user.getDisplayName());
@@ -104,24 +106,45 @@ public class MainActivity extends AppCompatActivity
 
         //creating fragment object
         Fragment fragment = null;
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         //initializing the fragment object which is selected
         switch (itemId) {
             case R.id.nav_profile:
-                fragment = new ProfileFragment();
+                if (!user.isAnonymous()) {
+                    fragment = new ProfileFragment();
+                    break;
+                }
+                fragment = new ForAnonymousFragment();
                 break;
             case R.id.nav_liked:
-                fragment = new LikedFragment();
+                if (!user.isAnonymous()) {
+                    fragment = new LikedFragment();
+                    break;
+                }
+                fragment = new ForAnonymousFragment();
                 break;
             case R.id.nav_request:
-                fragment = new RequsetFragment();
+                if (!user.isAnonymous()) {
+                    fragment = new RequsetFragment();
+                    break;
+                }
+                fragment = new ForAnonymousFragment();
                 break;
+
             case R.id.nav_exchange_list:
                 fragment = new ExchangeRecyclerListFragment();
                 break;
+
             case R.id.nav_settings:
                 fragment = new SettingsFragment();
                 break;
+            case R.id.nav_logout:
+                Intent regActivity = new Intent(this, AuthActivity.class);
+                FirebaseAuth.getInstance().signOut();
+                startActivity(regActivity);
+                finish();
+                return;
         }
 
         //replacing the fragment

@@ -41,19 +41,28 @@ public class AuthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
+        Intent intent = getIntent();
+        Boolean value = intent.getBooleanExtra("key", true);
+
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
+        if (user == null || user.isAnonymous()) {
+            if (value) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.auth_frame, new LogInFragment())
+                        .commit();
+            } else {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.auth_frame, new RegisterFragment())
+                        .commit();
+            }
+        } else {
             Intent regActivity = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(regActivity);
             finish();
             return;
-        }else{
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.auth_frame, new LogInFragment())
-                    .commit();
         }
 
-        
     }
 
 }

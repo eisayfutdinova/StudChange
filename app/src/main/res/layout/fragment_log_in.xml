@@ -12,7 +12,7 @@
         android:layout_width="265dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="190dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="Email"
@@ -22,7 +22,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:hint="Password"
         android:id="@+id/login_password"
         android:layout_width="265dp"
         android:layout_height="wrap_content"
@@ -30,6 +29,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,5 +86,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/or" />
+
+    <TextView
+        android:id="@+id/log_NoRegistration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Continue as guest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/log_register"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

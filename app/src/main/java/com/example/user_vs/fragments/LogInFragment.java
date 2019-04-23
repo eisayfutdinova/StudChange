@@ -7,7 +7,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,7 +37,6 @@ public class LogInFragment extends Fragment {
     private EditText userEmail, userPassword;
     private ProgressBar loadingProgress;
     private Button loginButton;
-    private TextView logRegister;
 
     private FirebaseAuth fbAuth;
 
@@ -58,7 +61,10 @@ public class LogInFragment extends Fragment {
         userPassword = view.findViewById(R.id.login_password);
         loadingProgress = view.findViewById(R.id.login_progressBar);
         loginButton = view.findViewById(R.id.login_button);
-        logRegister = view.findViewById(R.id.log_register);
+
+        TextView logRegister = view.findViewById(R.id.log_register);
+        TextView noRegistration = view.findViewById(R.id.log_NoRegistration);
+
 
         fbAuth = FirebaseAuth.getInstance();
         MainActivity = new Intent(getContext(),MainActivity.class);
@@ -87,6 +93,22 @@ public class LogInFragment extends Fragment {
                     .replace(R.id.auth_frame, new RegisterFragment())
                     .commit();
         });
+
+        noRegistration.setOnClickListener(v -> {
+            fbAuth.signInAnonymously().addOnCompleteListener(getActivity(), task -> {
+                if (task.isSuccessful())
+                {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInAnonymously:success");
+                    updateUI();
+
+                }else{
+                    Log.w(TAG, "signInAnonymously:failure", task.getException());
+                    Toast.makeText(getActivity(), "Authentication failed.",
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
     }
 
     private void CheckAccount(String email, String password) {
@@ -112,7 +134,9 @@ public class LogInFragment extends Fragment {
     }
 
     private void updateUI() {
-        startActivity(MainActivity);
+        Intent homeActivity = new Intent(getContext(), MainActivity.class);
+        homeActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(homeActivity);
         getActivity().finish();
     }
 

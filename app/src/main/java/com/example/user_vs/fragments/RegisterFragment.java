@@ -13,7 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -31,6 +36,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import static android.app.Activity.RESULT_OK;
+import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
 
 /**
@@ -46,7 +52,6 @@ public class RegisterFragment extends Fragment {
     private EditText userEmail, userPassword, userPassword2, userName;
     private ProgressBar loadingProgress;
     private Button regButton;
-    private TextView regLogin;
 
     private FirebaseAuth fbAuth;
 
@@ -66,7 +71,8 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        regLogin = view.findViewById(R.id.reg_sign_in);
+        TextView regLogin = view.findViewById(R.id.reg_sign_in);
+
         userEmail = view.findViewById(R.id.reg_mail);
         userPassword = view.findViewById(R.id.reg_password);
         userPassword2 = view.findViewById(R.id.reg_confirm);
@@ -103,7 +109,6 @@ public class RegisterFragment extends Fragment {
                     .replace(R.id.auth_frame, new LogInFragment())
                     .commit();
         });
-
 
         ImgUserPhoto = view.findViewById(R.id.reg_usersPhoto);
 
@@ -164,6 +169,7 @@ public class RegisterFragment extends Fragment {
 
     private void updateUI() {
         Intent homeActivity = new Intent(getContext(), MainActivity.class);
+        homeActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(homeActivity);
         getActivity().finish();
     }

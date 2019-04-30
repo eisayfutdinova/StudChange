@@ -10,4 +10,55 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="or">or</string>
+    <string name="dialog_title">Languages</string>
+    <string name="ok_label">OK</string>
+    <string name="dismiss_label">Dismiss</string>
+    <string name="clear_all_label">Clear all</string>
+
+    <string-array name="list_language">
+        <item>Afrikaans</item>
+        <item>Albanian</item>
+        <item>Arabic</item>
+        <item>Armenian</item>
+        <item>Basque</item>
+        <item>Bengali</item>
+        <item>Bulgarian</item>
+        <item>Catalan</item>
+        <item>Cambodian</item>
+        <item>Chinese</item>
+        <item>Croatian</item>
+        <item>Czech</item>
+        <item>Danish</item>
+        <item>Dutch</item>
+        <item>English</item>
+        <item>Estonian</item>
+        <item>Finnish</item>
+        <item>French</item>
+        <item>Georgian</item>
+        <item>German</item>
+        <item>Greek</item>
+        <item>Hindi</item>
+        <item>Hungarian</item>
+        <item>Indonesian</item>
+        <item>Irish</item>
+        <item>Italian</item>
+        <item>Japanese</item>
+        <item>Korean</item>
+        <item>Latin</item>
+        <item>Macedonian</item>
+        <item>Norwegian</item>
+        <item>Persian</item>
+        <item>Polish</item>
+        <item>Portuguese</item>
+        <item>Russian</item>
+        <item>Serbian</item>
+        <item>Slovak</item>
+        <item>Slovenian</item>
+        <item>Spanish</item>
+        <item>Swedish</item>
+        <item>Tibetan</item>
+        <item>Turkish</item>
+        <item>Ukrainian</item>
+        <item>Uzbek</item>
+    </string-array>
 </resources>

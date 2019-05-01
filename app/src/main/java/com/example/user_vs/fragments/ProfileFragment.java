@@ -2,7 +2,6 @@ package com.example.user_vs.fragments;
 
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,9 +13,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -24,7 +37,15 @@ import java.util.ArrayList;
  */
 public class ProfileFragment extends Fragment {
 
-    private EditText fullName, country, university, age;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    private EditText fullName, country, university, age, mail;
+
+    private RadioGroup radioSexGroup;
+    String gender;
+
+    Button saveButton;
+
     TextView languages;
     Button languageButton;
     String[] listLanguages;
@@ -46,11 +67,53 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        db.collection("profiles")
+                .document(user.getUid())
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        Map<String, Object> map = documentSnapshot.getData();
+                        age.setText(map.get("age").toString());
+                        country.setText(map.get("country").toString());
+                        fullName.setText(map.get("fullName").toString());
+                        university.setText(map.get("university").toString());
+                        gender = map.get("gender").toString();
+                        switch (gender){
+                            case "male":
+                                radioSexGroup.check(R.id.radioMale);
+                                break;
+                            case "female":
+                                radioSexGroup.check(R.id.radioFemale);
+                                break;
+                        }
+                    }
+                });
 
         fullName = view.findViewById(R.id.profile_fullName);
         country = view.findViewById(R.id.profile_country);
         university = view.findViewById(R.id.profile_university);
         age = view.findViewById(R.id.profile_age);
+
+        mail = view.findViewById(R.id.profile_mail);
+        mail.setText(user.getEmail());
+
+        saveButton = view.findViewById(R.id.profile_saveButton);
+
+        radioSexGroup = view.findViewById(R.id.profile_genderGroup);
+        radioSexGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            switch (checkedId) {
+                case R.id.radioMale:
+                    gender = "male";
+                    break;
+                case R.id.radioFemale:
+                    gender = "female";
+                    break;
+            }
+        });
+
+
         languageButton = view.findViewById(R.id.profile_button_lang);
         languages = view.findViewById(R.id.profile_list_lang);
         listLanguages = getResources().getStringArray(R.array.list_language);
@@ -92,5 +155,30 @@ public class ProfileFragment extends Fragment {
             AlertDialog mDialog = mBuilder.create();
             mDialog.show();
         });
+
+        saveButton.setOnClickListener(v -> {
+            final String userId = user.getUid();
+            final String fullNameStr = fullName.getText().toString();
+            final String mailStr = mail.getText().toString();
+            final String countryStr = country.getText().toString();
+            final String universityStr = university.getText().toString();
+            final String ageStr = age.getText().toString();
+            //final String languagesStr = languages.getText().toString();
+
+            if (fullNameStr.isEmpty() || mailStr.isEmpty() || countryStr.isEmpty() || universityStr.isEmpty() || ageStr.isEmpty()) {
+                showMessage("Please, verify all fields correctly");
+            } else {
+                ProfileUserInfo profileUserInfo = new ProfileUserInfo(userId, fullNameStr, gender,
+                        countryStr, universityStr, ageStr);
+                db.collection("profiles").document(userId).set(profileUserInfo);
+            }
+
+        });
     }
+
+    //to show toast message
+    private void showMessage(String s) {
+        Toast.makeText(getActivity(), s, Toast.LENGTH_LONG).show();
+    }
+
 }

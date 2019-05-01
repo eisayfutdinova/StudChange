@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ProfileFragment">
+
     <EditText
         android:id="@+id/profile_fullName"
         android:layout_width="match_parent"
@@ -14,13 +15,23 @@
         android:layout_marginEnd="8dp"
         android:hint="Full name" />
 
+    <EditText
+        android:id="@+id/profile_mail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp" />
+
     <RadioGroup
+        android:id="@+id/profile_genderGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <RadioButton
+            android:id="@+id/radioMale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
@@ -30,7 +41,7 @@
             android:textSize="14dp" />
 
         <RadioButton
-            android:id="@+id/radioF"
+            android:id="@+id/radioFemale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -84,6 +95,18 @@
         android:layout_height="20dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp" />
+
+    <Button
+        android:id="@+id/profile_saveButton"
+        android:layout_width="144dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_gravity="center"
+        android:background="@drawable/reg_btn_style"
+        android:text="Save" />
 
 
 </LinearLayout>

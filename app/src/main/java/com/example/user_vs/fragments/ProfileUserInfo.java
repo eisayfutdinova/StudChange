@@ -9,17 +9,19 @@ public class ProfileUserInfo {
     private String country;
     private String university;
     private String age;
+    private String languages;
 
     public ProfileUserInfo() {
     }
 
-    public ProfileUserInfo(String userId, String fullname, String gender, String country, String university, String age) {
+    public ProfileUserInfo(String userId, String fullname, String gender, String country, String university, String age, String languages) {
         this.userId = userId;
         this.fullName = fullname;
         this.gender = gender;
         this.country = country;
         this.university = university;
         this.age = age;
+        this.languages = languages;
     }
 
     public String getFullName() {
@@ -46,4 +48,7 @@ public class ProfileUserInfo {
         return userId;
     }
 
+    public String getLanguages() {
+        return languages;
+    }
 }

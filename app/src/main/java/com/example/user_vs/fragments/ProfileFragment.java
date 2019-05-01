@@ -27,7 +27,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -75,12 +77,19 @@ public class ProfileFragment extends Fragment {
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         Map<String, Object> map = documentSnapshot.getData();
-                        age.setText(map.get("age").toString());
-                        country.setText(map.get("country").toString());
-                        fullName.setText(map.get("fullName").toString());
-                        university.setText(map.get("university").toString());
-                        gender = map.get("gender").toString();
-                        switch (gender){
+                        if (map.containsKey("age"))
+                            age.setText(map.get("age").toString());
+                        if (map.containsKey("country"))
+                            country.setText(map.get("country").toString());
+                        if (map.containsKey("fullName"))
+                            fullName.setText(map.get("fullName").toString());
+                        if (map.containsKey("university"))
+                            university.setText(map.get("university").toString());
+                        if (map.containsKey("gender"))
+                            gender = map.get("gender").toString();
+                        if (map.containsKey("languages"))
+                            languages.setText(map.get("languages").toString());
+                        switch (gender) {
                             case "male":
                                 radioSexGroup.check(R.id.radioMale);
                                 break;
@@ -163,13 +172,14 @@ public class ProfileFragment extends Fragment {
             final String countryStr = country.getText().toString();
             final String universityStr = university.getText().toString();
             final String ageStr = age.getText().toString();
-            //final String languagesStr = languages.getText().toString();
+            String languagesStr = languages.getText().toString();
+
 
             if (fullNameStr.isEmpty() || mailStr.isEmpty() || countryStr.isEmpty() || universityStr.isEmpty() || ageStr.isEmpty()) {
                 showMessage("Please, verify all fields correctly");
             } else {
                 ProfileUserInfo profileUserInfo = new ProfileUserInfo(userId, fullNameStr, gender,
-                        countryStr, universityStr, ageStr);
+                        countryStr, universityStr, ageStr, languagesStr);
                 db.collection("profiles").document(userId).set(profileUserInfo);
             }
 

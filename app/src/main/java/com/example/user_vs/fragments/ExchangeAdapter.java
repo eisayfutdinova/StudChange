@@ -44,9 +44,11 @@ public class ExchangeAdapter extends RecyclerView.Adapter<ExchangeAdapter.Produc
         Exchange product = productList.get(position);
 
         //binding the data with the viewholder views
-        holder.textViewTitle.setText(product.getUnivercityName());
-        holder.textViewShortDesc.setText(product.getCountry());
-        holder.textViewPrice.setText(product.getEducationalProgram());
+        holder.textViewTitle.setText(product.getName());
+        holder.textViewShortDesc.setText(product.getDescription());
+        holder.textViewPrice.setText(product.getCost());
+        holder.textViewType.setText(product.getType());
+        holder.textViewCountry.setText(product.getCountry());
         holder.itemView.setOnClickListener(v -> {
             DetailsExchangeFragment detailsExchangeFragment = DetailsExchangeFragment.newInstance(product.getExchangeId());
             ((MainActivity)mCtx).getSupportFragmentManager()
@@ -65,14 +67,16 @@ public class ExchangeAdapter extends RecyclerView.Adapter<ExchangeAdapter.Produc
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewTitle, textViewShortDesc, textViewPrice;
+        TextView textViewTitle, textViewCountry, textViewShortDesc, textViewPrice, textViewType;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
 
-            textViewTitle = itemView.findViewById(R.id.textViewTitle);
-            textViewShortDesc = itemView.findViewById(R.id.textViewShortDesc);
-            textViewPrice = itemView.findViewById(R.id.textViewPrice);
+            textViewTitle = itemView.findViewById(R.id.card_Name);
+            textViewShortDesc = itemView.findViewById(R.id.card_description);
+            textViewType = itemView.findViewById(R.id.card_type);
+            textViewPrice = itemView.findViewById(R.id.card_cost);
+            textViewCountry = itemView.findViewById(R.id.card_country);
         }
     }
 }

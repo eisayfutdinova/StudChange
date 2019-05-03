@@ -14,33 +14,47 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textViewPrice"
+            android:id="@+id/card_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:textSize="22sp"
             android:textStyle="bold"
-            tools:text="Univer" />
+            tools:text="WORK AND TRAVEL USA" />
 
         <TextView
-            android:id="@+id/textViewTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:textSize="16sp"
-            tools:text="информация о стажировке"/>
-
-        <TextView
-            android:id="@+id/textViewShortDesc"
+            android:id="@+id/card_country"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:textSize="18sp"
-            tools:text="страна стажировки"/>
+            tools:text="USA"/>
 
+        <TextView
+            android:id="@+id/card_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:textSize="18sp"
+            tools:text="Work"/>
+
+        <TextView
+            android:id="@+id/card_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:textSize="16sp"
+            tools:text="Это попытка пожить жизнью французского студента на каникулах — ты сможешь неплохо заработать и получить много новых впечатлений!" />
+
+        <TextView
+            android:id="@+id/card_cost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="от 1439$" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

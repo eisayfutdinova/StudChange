@@ -52,10 +52,12 @@ public class DetailsExchangeFragment extends Fragment {
         db.collection("exchange").document(ex_id).get()
                 .addOnSuccessListener(queryDocSnap -> {
                     Exchange exchange = queryDocSnap.toObject(Exchange.class);
-                    ((TextView)getActivity().findViewById(R.id.exchange_headline)).setText(exchange.getUnivercityName());
-                    ((TextView)getActivity().findViewById(R.id.countyTextView)).setText(exchange.getCountry());
-                    ((TextView)getActivity().findViewById(R.id.programTextView)).setText(exchange.getEducationalProgram());
-                    ((TextView)getActivity().findViewById(R.id.informationTextView)).setText(exchange.getLanguage());
+                    ((TextView)getActivity().findViewById(R.id.exchange_name)).setText(exchange.getName());
+                    ((TextView)getActivity().findViewById(R.id.exchange_county)).setText(exchange.getCountry());
+                    ((TextView)getActivity().findViewById(R.id.exchange_type)).setText(exchange.getType());
+                    ((TextView)getActivity().findViewById(R.id.exchange_fulldescription)).setText(exchange.getFulldescription());
+                    ((TextView)getActivity().findViewById(R.id.exchange_link)).setText(exchange.getLink());
+                    ((TextView)getActivity().findViewById(R.id.exchange_costDetails)).setText(exchange.getCostDetails());
                 });
 
     }

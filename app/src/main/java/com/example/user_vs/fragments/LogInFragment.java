@@ -1,6 +1,8 @@
 package com.example.user_vs.fragments;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,10 +67,25 @@ public class LogInFragment extends Fragment {
 
         TextView logRegister = view.findViewById(R.id.log_register);
         TextView noRegistration = view.findViewById(R.id.log_NoRegistration);
+        TextView resetPassword = view.findViewById(R.id.login_resetPassword);
 
 
         fbAuth = FirebaseAuth.getInstance();
-        MainActivity = new Intent(getContext(),MainActivity.class);
+        MainActivity = new Intent(getContext(), MainActivity.class);
+
+        resetPassword.setOnClickListener(c -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Forgot password");
+            View view1 = getLayoutInflater().inflate(R.layout.dialog_forgot_password, null);
+            EditText username = view1.findViewById((R.id.forgot_userMail));
+            builder.setView(view1);
+            builder.setPositiveButton("Reset", (dialog, which) -> {
+                forgotPassword(username);
+            });
+            builder.setNegativeButton("Close", (dialog, which) -> {
+            });
+            builder.show();
+        });
 
         loginButton.setOnClickListener(v -> {
             loginButton.setVisibility(View.INVISIBLE);
@@ -87,7 +105,7 @@ public class LogInFragment extends Fragment {
 
         });
 
-        logRegister.setOnClickListener(v ->{
+        logRegister.setOnClickListener(v -> {
             getActivity().getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.auth_frame, new RegisterFragment())
@@ -96,19 +114,33 @@ public class LogInFragment extends Fragment {
 
         noRegistration.setOnClickListener(v -> {
             fbAuth.signInAnonymously().addOnCompleteListener(getActivity(), task -> {
-                if (task.isSuccessful())
-                {
+                if (task.isSuccessful()) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInAnonymously:success");
                     updateUI();
 
-                }else{
+                } else {
                     Log.w(TAG, "signInAnonymously:failure", task.getException());
                     Toast.makeText(getActivity(), "Authentication failed.",
                             Toast.LENGTH_SHORT).show();
                 }
             });
         });
+    }
+
+    private void forgotPassword(EditText username) {
+        if (username.getText().toString().isEmpty()){
+            return;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(username.getText().toString()).matches()) {
+            return;
+        }
+        fbAuth.sendPasswordResetEmail(username.getText().toString())
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getActivity(),"Email sent.",Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void CheckAccount(String email, String password) {
@@ -119,7 +151,7 @@ public class LogInFragment extends Fragment {
                     loadingProgress.setVisibility(View.INVISIBLE);
                     loginButton.setVisibility(View.VISIBLE);
                     updateUI();
-                }else{
+                } else {
                     showMessage(task.getException().getMessage());
                     loginButton.setVisibility(View.VISIBLE);
                     loadingProgress.setVisibility(View.INVISIBLE);

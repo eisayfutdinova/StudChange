@@ -1,40 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailsExchangeFragment"
-    android:orientation="vertical">
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        tools:srcCompat="@tools:sample/avatars"/>
-    <TextView
-        android:id="@+id/exchange_headline"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="46sp"
-        android:textStyle="bold"
-        tools:text="HSE" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/countyTextView"
-        android:text ="Country: "
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/programTextView"
-        tools:text="P I"
-        />
-    <TextView
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/informationTextView"
-        tools:text="information..."
-        />
+        android:orientation="vertical"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        tools:context=".DetailsExchangeFragment">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/exchange_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            tools:text="WORK AND TRAVEL USA" />
+
+        <TextView
+            android:id="@+id/exchange_county"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            tools:text="USA" />
+
+        <TextView
+            android:id="@+id/exchange_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Work" />
+
+        <TextView
+            android:id="@+id/exchange_fulldescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            tools:text="Программа Work and Travel состоит из двух частей, первая часть – это работа. Каждый студент имеет право работать ТОЛЬКО в период с 15 мая по 15 сентября, даты работы каждый студент может подбирать индивидуально, согласно планам сдачи летней сессии и личных планов, но в рамках периода 15 мая - 15 сентября." />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="В стоимость входит:" />
+
+        <TextView
+            android:id="@+id/exchange_costDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            tools:text="Помощь в оформлении документов; Медицинская страховка на срок программы Work and Travel, указанный в форме DS-2019; Проверка твоей вакансии на работу в США; Ориентационные материалы и советы по программе Work and Travel; Путеводитель по США «Открой Америку»; Информационная брошюра о программе Work and Travel; Услуги горячей телефонной линии в США" />
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" Для подачи заявки и более побродной информации переходите по ссылке:"
+            />
+
+        <TextView
+            android:id="@+id/exchange_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="http::some_link"/>
+
+    </LinearLayout>
+</ScrollView>

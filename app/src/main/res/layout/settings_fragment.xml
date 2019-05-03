@@ -1,15 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <TextView
+    <Button
+        android:id="@+id/settings_changePhoto"
+        android:layout_width="160dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="openGallery"
+        android:text="Change photo" />
+
+    <EditText
+        android:id="@+id/settings_currentPas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="3dp"
+        android:inputType="textPassword"
+        android:hint="current password" />
+    <EditText
+        android:id="@+id/settings_newPas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
+        android:inputType="textPassword"
+        android:hint="new password" />
+    <EditText
+        android:id="@+id/settings_confirmPas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
+        android:inputType="textPassword"
+        android:hint="repeat password" />
+
+    <Button
+        android:id="@+id/settings_changePassword"
+        android:layout_width="160dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="openGallery"
+        android:text="Change password" />
+
+    <ProgressBar
+        android:id="@+id/settings_progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Menu 3"
-        android:id="@+id/textView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="50dp"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/settings_deleteAccount"
+        android:layout_width="160dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="170dp"
+        android:layout_marginEnd="8dp"
+        android:layout_gravity="center"
+        android:onClick="openGallery"
+        android:text="Delete account" />
+
+
+</LinearLayout>

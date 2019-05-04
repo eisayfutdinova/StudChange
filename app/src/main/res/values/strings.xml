@@ -11,6 +11,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="or">or</string>
     <string name="dialog_title">Languages</string>
+    <string name="dialog_programs">Programs</string>
+    <string name="dialog_countries">Countries</string>
     <string name="ok_label">OK</string>
     <string name="dismiss_label">Dismiss</string>
     <string name="clear_all_label">Clear all</string>

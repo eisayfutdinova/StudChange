@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,7 +54,8 @@ public class DetailsExchangeFragment extends Fragment {
         db.collection("exchange").document(ex_id).get()
                 .addOnSuccessListener(queryDocSnap -> {
                     Exchange exchange = queryDocSnap.toObject(Exchange.class);
-                    ((TextView)getActivity().findViewById(R.id.exchange_name)).setText(exchange.getName());
+                    assert exchange != null;
+                    ((TextView) Objects.requireNonNull(getActivity()).findViewById(R.id.exchange_name)).setText(exchange.getName());
                     ((TextView)getActivity().findViewById(R.id.exchange_county)).setText(exchange.getCountry());
                     ((TextView)getActivity().findViewById(R.id.exchange_type)).setText(exchange.getType());
                     ((TextView)getActivity().findViewById(R.id.exchange_fulldescription)).setText(exchange.getFulldescription());

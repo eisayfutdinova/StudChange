@@ -146,7 +146,6 @@ public class RegisterFragment extends Fragment {
         StorageReference imageFilePath = fbStorage.child(pickedImgUri.getLastPathSegment());
 
         imageFilePath.putFile(pickedImgUri).addOnSuccessListener(taskSnapshot -> {
-
             //get image url
 
             imageFilePath.getDownloadUrl().addOnSuccessListener(uri -> {

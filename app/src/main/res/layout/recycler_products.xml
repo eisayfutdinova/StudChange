@@ -7,39 +7,46 @@
     android:layout_marginBottom="8dp">
 
     <LinearLayout
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/card_Name"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            tools:text="WORK AND TRAVEL USA" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/card_country"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:textSize="18sp"
-            tools:text="USA"/>
+            <TextView
+                android:id="@+id/card_Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                tools:text="WORK AND TRAVEL USA" />
 
-        <TextView
-            android:id="@+id/card_type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:textSize="18sp"
-            tools:text="Work"/>
+            <TextView
+                android:id="@+id/card_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_toEndOf="@+id/card_Name"
+                android:gravity="end"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                tools:text="Work" />
+
+            <TextView
+                android:id="@+id/card_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/card_Name"
+                android:layout_marginStart="8dp"
+                android:textSize="18sp"
+                tools:text="USA" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/card_description"

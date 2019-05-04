@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.Objects;
+
 import static android.app.Activity.RESULT_OK;
 import static androidx.constraintlayout.motion.widget.MotionScene.TAG;
 import static com.example.user_vs.fragments.RegisterFragment.PReqCode;
@@ -46,9 +49,9 @@ import static com.example.user_vs.fragments.RegisterFragment.REQUESTCODE;
 
 public class SettingsFragment extends Fragment {
 
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-    EditText current, newPassword, confirmPassword;
+    private EditText current, newPassword, confirmPassword;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //returning our layout file
@@ -61,8 +64,7 @@ public class SettingsFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
-        getActivity().setTitle("Настройки");
-
+        Objects.requireNonNull(getActivity()).setTitle("Настройки");
 
         current = view.findViewById(R.id.settings_currentPas);
         newPassword = view.findViewById(R.id.settings_newPas);
@@ -82,22 +84,21 @@ public class SettingsFragment extends Fragment {
             dialog.setPositiveButton("Delete", (dialog1, which) -> {
                 user.delete().addOnCompleteListener(task -> {
                     progressBar.setVisibility(View.VISIBLE);
-                    if (task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         progressBar.setVisibility(View.GONE);
                         Toast.makeText(getActivity(), "Account deleted.", Toast.LENGTH_SHORT).show();
                         Intent regActivity = new Intent(getActivity(), AuthActivity.class);
                         startActivity(regActivity);
                         getActivity().finish();
-                        return;
-                    }else{
-                        Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.INVISIBLE);
                     }
                 });
             });
 
             dialog.setNegativeButton("Canel", (dialog12, which) -> {
-               dialog12.dismiss();
+                dialog12.dismiss();
             });
 
             AlertDialog alertDialog = dialog.create();
@@ -105,6 +106,7 @@ public class SettingsFragment extends Fragment {
         });
 
     }
+
 
     private void changePassword() {
         final String currentStr = current.getText().toString();
@@ -151,5 +153,6 @@ public class SettingsFragment extends Fragment {
             Toast.makeText(getActivity(), "Please enter all the fields.", Toast.LENGTH_SHORT).show();
         }
     }
+
 
 }

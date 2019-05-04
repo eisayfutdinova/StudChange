@@ -1,31 +1,48 @@
 package com.example.user_vs.fragments;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.auth.User;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import static com.example.user_vs.fragments.RegisterFragment.PReqCode;
+import static com.example.user_vs.fragments.RegisterFragment.REQUESTCODE;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    Uri pickedImgUri;
+    ImageView userPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,20 +63,86 @@ public class MainActivity extends AppCompatActivity
         displaySelectedScreen(R.id.nav_exchange_list);
 
         View navViewHeader = navigationView.getHeaderView(0);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         TextView userName = navViewHeader.findViewById(R.id.userName);
         TextView userMail = navViewHeader.findViewById(R.id.userMail);
-        ImageView userPhoto = navViewHeader.findViewById(R.id.userPhoto);
+        userPhoto = navViewHeader.findViewById(R.id.userPhoto);
 
         if (user.getPhotoUrl() != null)
             Glide.with(this).load(user.getPhotoUrl()).into(userPhoto);
+
+        userPhoto.setOnClickListener(v->{
+            if (Build.VERSION.SDK_INT >= 22) {
+                checkAndRequestPermission();
+            } else {
+                openGallery();
+            }
+        });
 
         userName.setText(user.getDisplayName());
         userMail.setText(user.getEmail());
 
 
         //add this line to display menu1 when the activity is loaded
+    }
+
+    private void updateUserInfo( Uri pickedImgUri, FirebaseUser currentUser) {
+        //first update user's photo to firebase and get url
+
+        StorageReference fbStorage = FirebaseStorage.getInstance().getReference().child("users_photos");
+        StorageReference imageFilePath = fbStorage.child(pickedImgUri.getLastPathSegment());
+
+        imageFilePath.putFile(pickedImgUri).addOnSuccessListener(taskSnapshot -> {
+            //get image url
+
+            imageFilePath.getDownloadUrl().addOnSuccessListener(uri -> {
+                //url contains user image url
+
+                UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
+                        .setPhotoUri(uri)
+                        .build();
+
+                currentUser.updateProfile(profileUpdate)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                            }
+                        });
+            });
+        });
+
+    }
+
+    private void checkAndRequestPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                Toast.makeText(this, "Please, accept for required permission", Toast.LENGTH_SHORT).show();
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        PReqCode);
+            }
+        } else
+            openGallery();
+
+    }
+
+    private void openGallery() {
+        Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType("image/*");
+        startActivityForResult(galleryIntent, REQUESTCODE);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == REQUESTCODE && data != null) {
+            // user picked an image successfully
+            // we need to save its reference to Uri variable
+            pickedImgUri = data.getData();
+            userPhoto.setImageURI(pickedImgUri);
+            updateUserInfo(pickedImgUri, user);
+        }
     }
 
     @Override
@@ -108,6 +191,7 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+        assert user != null;
         //initializing the fragment object which is selected
         switch (itemId) {
             case R.id.nav_profile:

@@ -23,7 +23,7 @@ public class ExchangeAdapter extends RecyclerView.Adapter<ExchangeAdapter.Produc
     private List<Exchange> productList;
 
     //getting the context and product list with constructor
-    public ExchangeAdapter(Context mCtx, List<Exchange> productList) {
+    ExchangeAdapter(Context mCtx, List<Exchange> productList) {
         this.mCtx = mCtx;
         this.productList = productList;
     }

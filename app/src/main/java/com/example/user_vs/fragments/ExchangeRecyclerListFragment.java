@@ -12,6 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,7 +48,7 @@ public class ExchangeRecyclerListFragment extends Fragment {
 
         //the recyclerview
         RecyclerView recyclerView;
-        recyclerView = getView().findViewById(R.id.recycler_view);
+        recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -58,6 +59,7 @@ public class ExchangeRecyclerListFragment extends Fragment {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (DocumentSnapshot ds : queryDocumentSnapshots) {
                         Exchange ex = ds.toObject(Exchange.class);
+                        assert ex != null;
                         ex.setExchangeId(ds.getId());
 
                         exchangeList.add(ex);

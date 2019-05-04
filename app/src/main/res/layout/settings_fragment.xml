@@ -4,15 +4,6 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/settings_changePhoto"
-        android:layout_width="160dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="openGallery"
-        android:text="Change photo" />
 
     <EditText
         android:id="@+id/settings_currentPas"

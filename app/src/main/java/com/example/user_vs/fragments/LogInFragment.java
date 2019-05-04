@@ -27,6 +27,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
 
@@ -106,14 +108,14 @@ public class LogInFragment extends Fragment {
         });
 
         logRegister.setOnClickListener(v -> {
-            getActivity().getSupportFragmentManager()
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.auth_frame, new RegisterFragment())
                     .commit();
         });
 
         noRegistration.setOnClickListener(v -> {
-            fbAuth.signInAnonymously().addOnCompleteListener(getActivity(), task -> {
+            fbAuth.signInAnonymously().addOnCompleteListener(Objects.requireNonNull(getActivity()), task -> {
                 if (task.isSuccessful()) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInAnonymously:success");
@@ -144,18 +146,15 @@ public class LogInFragment extends Fragment {
     }
 
     private void CheckAccount(String email, String password) {
-        fbAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    loadingProgress.setVisibility(View.INVISIBLE);
-                    loginButton.setVisibility(View.VISIBLE);
-                    updateUI();
-                } else {
-                    showMessage(task.getException().getMessage());
-                    loginButton.setVisibility(View.VISIBLE);
-                    loadingProgress.setVisibility(View.INVISIBLE);
-                }
+        fbAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                loadingProgress.setVisibility(View.INVISIBLE);
+                loginButton.setVisibility(View.VISIBLE);
+                updateUI();
+            } else {
+                showMessage(Objects.requireNonNull(task.getException()).getMessage());
+                loginButton.setVisibility(View.VISIBLE);
+                loadingProgress.setVisibility(View.INVISIBLE);
             }
         });
     }

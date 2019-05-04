@@ -42,7 +42,7 @@ public class AuthActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
 
         Intent intent = getIntent();
-        Boolean value = intent.getBooleanExtra("key", true);
+        boolean value = intent.getBooleanExtra("key", true);
 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -60,7 +60,6 @@ public class AuthActivity extends AppCompatActivity {
             Intent regActivity = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(regActivity);
             finish();
-            return;
         }
 
     }

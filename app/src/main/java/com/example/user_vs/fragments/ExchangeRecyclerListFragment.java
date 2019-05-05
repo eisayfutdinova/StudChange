@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -35,6 +38,8 @@ public class ExchangeRecyclerListFragment extends Fragment {
 
     ArrayList<String> listOfProgram;
     ArrayList<String> listOfCountries;
+    List<Exchange> exchangeList;
+    RecyclerView recyclerView;
 
     public ExchangeRecyclerListFragment() {
         // Required empty public constructor
@@ -51,9 +56,10 @@ public class ExchangeRecyclerListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getActivity().setTitle("");
 
         //a list to store all the exchanges
-        List<Exchange> exchangeList = new ArrayList<>();
+        exchangeList = new ArrayList<>();
         List<Exchange> exchangePrograms = new ArrayList<>();
         List<Exchange> exchangeCountries = new ArrayList<>();
 
@@ -61,7 +67,6 @@ public class ExchangeRecyclerListFragment extends Fragment {
         listOfCountries = new ArrayList<>();
 
         //the recyclerview
-        RecyclerView recyclerView;
         recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -243,6 +248,33 @@ public class ExchangeRecyclerListFragment extends Fragment {
                 })
                 .addOnFailureListener(e -> Log.w(getActivity().getPackageName(), "Cannot get"));
 
+        SearchView searchView = view.findViewById(R.id.searchView);
+        if (searchView!=null){
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    search(newText);
+                    return true;
+                }
+            });
+        }
 
     }
+
+    private void search(String string) {
+        ArrayList<Exchange> mylist = new ArrayList<>();
+        for (Exchange ex: exchangeList){
+            if(ex.getName().toLowerCase().contains(string.toLowerCase())){
+                mylist.add(ex);
+            }
+        }
+        recyclerView.setAdapter(new ExchangeAdapter(getContext(), mylist));
+        recyclerView.getAdapter().notifyDataSetChanged();
+    }
+
 }

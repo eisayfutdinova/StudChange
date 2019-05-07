@@ -168,7 +168,6 @@ public class ProfileFragment extends Fragment {
             final String ageStr = age.getText().toString();
             String languagesStr = languages.getText().toString();
 
-
             if (fullNameStr.isEmpty() || mailStr.isEmpty() || countryStr.isEmpty() || universityStr.isEmpty() || ageStr.isEmpty()) {
                 showMessage("Please, verify all fields correctly");
             } else {

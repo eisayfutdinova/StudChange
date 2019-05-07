@@ -13,6 +13,8 @@ import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -62,6 +64,8 @@ public class ExchangeRecyclerListFragment extends Fragment {
         exchangeList = new ArrayList<>();
         List<Exchange> exchangePrograms = new ArrayList<>();
         List<Exchange> exchangeCountries = new ArrayList<>();
+        List<Exchange> finalListProgram = new ArrayList<>();
+        List<Exchange> finalListCountry = new ArrayList<>();
 
         listOfProgram = new ArrayList<>();
         listOfCountries = new ArrayList<>();
@@ -72,6 +76,7 @@ public class ExchangeRecyclerListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         db.collection("exchange")
                 .get()
@@ -123,25 +128,41 @@ public class ExchangeRecyclerListFragment extends Fragment {
                             }
                             selectedProgramView.setText(lang.toString());
                             exchange_programs.clear();
+
+                            for (Exchange ex : exchangeList) {
+                                for (int i = 0; i < selectedPrograms.size(); i++) {
+                                    if (ex.getType().equals(arrayOfprograms[selectedPrograms.get(i)]))
+                                        exchange_programs.add(ex);
+                                }
+                            }
+
+                            finalListProgram.clear();
                             if (!exchangeCountries.isEmpty()) {
                                 for (Exchange ex : exchangeCountries) {
                                     for (int i = 0; i < selectedPrograms.size(); i++) {
                                         if (ex.getType().equals(arrayOfprograms[selectedPrograms.get(i)]))
-                                            exchange_programs.add(ex);
+                                            finalListProgram.add(ex);
                                     }
                                 }
                             } else {
-                                for (Exchange ex : exchangeList) {
-                                    for (int i = 0; i < selectedPrograms.size(); i++) {
-                                        if (ex.getType().equals(arrayOfprograms[selectedPrograms.get(i)]))
-                                            exchange_programs.add(ex);
-                                    }
-                                }
+                                finalListProgram.addAll(exchange_programs);
                             }
 
-                            recyclerView.setAdapter(new ExchangeAdapter(getContext(), exchange_programs));
-                            recyclerView.getAdapter().notifyDataSetChanged();
 
+                            recyclerView.setAdapter(new ExchangeAdapter(getContext(), finalListProgram));
+                            recyclerView.getAdapter().notifyDataSetChanged();
+//                            if (!finalListProgram.isEmpty()) {
+//                                recyclerView.setAdapter(new ExchangeAdapter(getContext(), finalListProgram));
+//                                recyclerView.getAdapter().notifyDataSetChanged();
+//                            } else {
+//                                if (exchangeCountries.isEmpty()) {
+//                                    recyclerView.setAdapter(adapter);
+//                                    recyclerView.getAdapter().notifyDataSetChanged();
+//                                } else {
+//                                    recyclerView.setAdapter(new ExchangeAdapter(getContext(), exchangeCountries));
+//                                    recyclerView.getAdapter().notifyDataSetChanged();
+//                                }
+//                            }
                         });
 
                         mBuilder.setNegativeButton(R.string.dismiss_label, (dialog, which) -> dialog.dismiss());
@@ -152,6 +173,7 @@ public class ExchangeRecyclerListFragment extends Fragment {
                                 selectedPrograms.clear();
                                 selectedProgramView.setText("");
                             }
+                            exchange_programs.clear();
                             if (!exchangeCountries.isEmpty()) {
                                 recyclerView.setAdapter(new ExchangeAdapter(getContext(), exchangeCountries));
                                 recyclerView.getAdapter().notifyDataSetChanged();
@@ -169,9 +191,21 @@ public class ExchangeRecyclerListFragment extends Fragment {
                     Button filterCountryButton = view.findViewById(R.id.filter_country);
                     TextView selectedCountiesView = view.findViewById(R.id.filter_selected_country);
                     HashSet<String> setOfCountries = new LinkedHashSet<>();
+
                     for (Exchange types : exchangeList) {
                         setOfCountries.add(types.getCountry());
                     }
+
+//                    if (exchange_programs.isEmpty()){
+//                        for (Exchange types : exchangeList) {
+//                            setOfCountries.add(types.getCountry());
+//                        }
+//                    }else{
+//                        for (Exchange types : exchangePrograms) {
+//                            setOfCountries.add(types.getCountry());
+//                        }
+//                    }
+
                     listOfCountries.addAll(setOfCountries);
 
                     String[] arrayOfCountries = new String[listOfCountries.size()];
@@ -202,25 +236,40 @@ public class ExchangeRecyclerListFragment extends Fragment {
                             }
                             selectedCountiesView.setText(lang.toString());
                             exchangeCountries.clear();
+
+                            for (Exchange ex : exchangeList) {
+                                for (int i = 0; i < selectedCountries.size(); i++) {
+                                    if (ex.getCountry().equals(arrayOfCountries[selectedCountries.get(i)]))
+                                        exchangeCountries.add(ex);
+                                }
+                            }
+
+                            finalListCountry.clear();
                             if (!exchange_programs.isEmpty()) {
                                 for (Exchange ex : exchange_programs) {
                                     for (int i = 0; i < selectedCountries.size(); i++) {
                                         if (ex.getCountry().equals(arrayOfCountries[selectedCountries.get(i)]))
-                                            exchangeCountries.add(ex);
+                                            finalListCountry.add(ex);
                                     }
                                 }
                             } else {
-                                for (Exchange ex : exchangeList) {
-                                    for (int i = 0; i < selectedCountries.size(); i++) {
-                                        if (ex.getCountry().equals(arrayOfCountries[selectedCountries.get(i)]))
-                                            exchangeCountries.add(ex);
-                                    }
-                                }
+                                finalListCountry.addAll(exchangeCountries);
                             }
 
-                            recyclerView.setAdapter(new ExchangeAdapter(getContext(), exchangeCountries));
+                            recyclerView.setAdapter(new ExchangeAdapter(getContext(), finalListCountry));
                             recyclerView.getAdapter().notifyDataSetChanged();
-
+//                            if (!finalListCountry.isEmpty()) {
+//                                recyclerView.setAdapter(new ExchangeAdapter(getContext(), finalListCountry));
+//                                recyclerView.getAdapter().notifyDataSetChanged();
+//                            } else {
+//                                if (exchange_programs.isEmpty()) {
+//                                    recyclerView.setAdapter(adapter);
+//                                    recyclerView.getAdapter().notifyDataSetChanged();
+//                                } else {
+//                                    recyclerView.setAdapter(new ExchangeAdapter(getContext(), exchange_programs));
+//                                    recyclerView.getAdapter().notifyDataSetChanged();
+//                                }
+//                            }
                         });
 
                         mBuilder.setNegativeButton(R.string.dismiss_label, (dialog, which) -> dialog.dismiss());
@@ -231,10 +280,12 @@ public class ExchangeRecyclerListFragment extends Fragment {
                                 selectedCountries.clear();
                                 selectedCountiesView.setText("");
                             }
+                            exchangeCountries.clear();
                             if (!exchange_programs.isEmpty()) {
                                 recyclerView.setAdapter(new ExchangeAdapter(getContext(), exchange_programs));
                                 recyclerView.getAdapter().notifyDataSetChanged();
                             } else {
+                                exchangeCountries.clear();
                                 recyclerView.setAdapter(adapter);
                                 recyclerView.getAdapter().notifyDataSetChanged();
                             }
@@ -249,7 +300,7 @@ public class ExchangeRecyclerListFragment extends Fragment {
                 .addOnFailureListener(e -> Log.w(getActivity().getPackageName(), "Cannot get"));
 
         SearchView searchView = view.findViewById(R.id.searchView);
-        if (searchView!=null){
+        if (searchView != null) {
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
@@ -268,8 +319,8 @@ public class ExchangeRecyclerListFragment extends Fragment {
 
     private void search(String string) {
         ArrayList<Exchange> mylist = new ArrayList<>();
-        for (Exchange ex: exchangeList){
-            if(ex.getName().toLowerCase().contains(string.toLowerCase())){
+        for (Exchange ex : exchangeList) {
+            if (ex.getName().toLowerCase().contains(string.toLowerCase())) {
                 mylist.add(ex);
             }
         }

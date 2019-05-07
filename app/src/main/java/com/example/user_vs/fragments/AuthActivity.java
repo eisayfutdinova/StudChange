@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.storage.StorageManager;
+import android.se.omapi.Session;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,7 +44,6 @@ public class AuthActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         boolean value = intent.getBooleanExtra("key", true);
-
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null || user.isAnonymous()) {

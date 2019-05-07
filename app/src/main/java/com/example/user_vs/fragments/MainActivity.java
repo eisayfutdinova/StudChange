@@ -214,6 +214,9 @@ public class MainActivity extends AppCompatActivity
                 startActivity(regActivity);
                 finish();
                 return;
+            case R.id.nav_apply_ex:
+                fragment = new ApplyExchangeFragment();
+                break;
         }
 
         //replacing the fragment

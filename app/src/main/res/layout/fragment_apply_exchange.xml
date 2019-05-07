@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ApplyExchangeFragment">
+
+    <EditText
+        android:id="@+id/apply_email"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:hint="Your email"
+        android:inputType="textEmailAddress"
+        android:textSize="25dp" />
+
+    <EditText
+        android:id="@+id/apply_name"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:hint="Name of program"
+        android:inputType="text"
+        android:textSize="25dp" />
+
+    <EditText
+        android:id="@+id/apply_county"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:hint="Country"
+        android:inputType="text"
+        android:textSize="25dp" />
+
+    <EditText
+        android:id="@+id/apply_type"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:inputType="text"
+        android:textSize="25dp"
+        android:hint="Type of program(work/study)" />
+
+    <EditText
+        android:id="@+id/apply_description"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:inputType="text"
+        android:textSize="25dp"
+        android:hint="Type of program(work/study)" />
+
+    <EditText
+        android:id="@+id/apply_costInformation"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:inputType="text"
+        android:textSize="25dp"
+        android:hint="Cost information" />
+
+    <EditText
+        android:id="@+id/apply_link"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:inputType="text"
+        android:textSize="25dp"
+        android:hint="Link of program" />
+
+    <Button
+        android:id="@+id/apply_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Apply"/>
+
+</LinearLayout>

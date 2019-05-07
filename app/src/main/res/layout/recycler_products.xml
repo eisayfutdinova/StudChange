@@ -29,11 +29,10 @@
 
             <TextView
                 android:id="@+id/card_type"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_toEndOf="@+id/card_Name"
-                android:gravity="end"
                 android:textSize="18sp"
                 android:textStyle="italic"
                 tools:text="Work" />
@@ -46,6 +45,14 @@
                 android:layout_marginStart="8dp"
                 android:textSize="18sp"
                 tools:text="USA" />
+
+            <com.like.LikeButton
+                app:icon_type="heart"
+                app:icon_size="12dp"
+                android:id="@+id/like_button"
+                android:layout_toRightOf="@id/card_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         </RelativeLayout>
 
         <TextView

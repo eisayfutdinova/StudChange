@@ -194,13 +194,6 @@ public class MainActivity extends AppCompatActivity
                 }
                 fragment = new ForAnonymousFragment();
                 break;
-            case R.id.nav_request:
-                if (!user.isAnonymous()) {
-                    fragment = new RequsetFragment();
-                    break;
-                }
-                fragment = new ForAnonymousFragment();
-                break;
 
             case R.id.nav_exchange_list:
                 fragment = new ExchangeRecyclerListFragment();

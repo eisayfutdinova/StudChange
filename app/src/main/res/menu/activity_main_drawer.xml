@@ -1,43 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_exchange_list"
+            android:icon="@drawable/list_ex_icon"
             android:title="Программы" />
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/profile"
             android:title="Анкета пользователя" />
         <item
             android:id="@+id/nav_liked"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/liked_list"
             android:title="Сохраненное" />
-        <item
-            android:id="@+id/nav_request"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Поданные заявки" />
+
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/settings"
             android:title="Настройки" />
-        <item android:id="@+id/nav_logout"
-            android:title="Выйти"/>
-    </group>
-    <group
-        >
         <item
             android:id="@+id/nav_apply_ex"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/add_ex_icon"
             android:title="Создать стажировку" />
-            />
+        />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/logout"
+            android:title="Выйти" />
     </group>
-
 
 
 </menu>

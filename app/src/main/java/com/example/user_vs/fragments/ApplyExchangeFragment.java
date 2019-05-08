@@ -93,6 +93,8 @@ public class ApplyExchangeFragment extends Fragment {
                 db.collection("applies")
                         .document()
                         .set(modelOfApply);
+
+                text = "Сообщение от " + apply_emailStr + "; Название программы: " + apply_nameStr + "; Страна стажировки: " + apply_countryStr + "; Тип стажировки: "+ apply_typeStr + "; Стоимость: " + apply_costStr + "; Описание: "+apply_descStr + "; Ссылка: "+ apply_linkStr;
                 sendNew();
             }
         });
@@ -100,9 +102,8 @@ public class ApplyExchangeFragment extends Fragment {
 
     private void sendNew() {
         context=getContext();
-        rec="nastia.khoruzhenko@gmail.com";
+        rec="lizasayfutdinova@gmail.com";
         sub="Test";
-        text="Lalala";
 
         Properties properties=new Properties();
         properties.put("mail.smtp.host", "smtp.gmail.com");
@@ -117,7 +118,7 @@ public class ApplyExchangeFragment extends Fragment {
             }
         });
 
-        progressDialog=ProgressDialog.show(context, "", "Sending///", true);
+        progressDialog=ProgressDialog.show(context, "", "Sending...", true);
 
         RetrieveFeedTask task=new RetrieveFeedTask();
         task.execute();

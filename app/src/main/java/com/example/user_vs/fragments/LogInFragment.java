@@ -67,7 +67,7 @@ public class LogInFragment extends Fragment {
         loadingProgress = view.findViewById(R.id.login_progressBar);
         loginButton = view.findViewById(R.id.login_button);
 
-        TextView logRegister = view.findViewById(R.id.log_register);
+        Button logRegister = view.findViewById(R.id.log_register);
         TextView noRegistration = view.findViewById(R.id.log_NoRegistration);
         TextView resetPassword = view.findViewById(R.id.login_resetPassword);
 

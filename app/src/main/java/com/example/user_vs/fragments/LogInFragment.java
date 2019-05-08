@@ -66,16 +66,24 @@ public class LogInFragment extends Fragment {
         userPassword = view.findViewById(R.id.login_password);
         loadingProgress = view.findViewById(R.id.login_progressBar);
         loginButton = view.findViewById(R.id.login_button);
+        loginButton.setClickable(true);
 
         Button logRegister = view.findViewById(R.id.log_register);
+        logRegister.setClickable(true);
         TextView noRegistration = view.findViewById(R.id.log_NoRegistration);
+        noRegistration.setClickable(true);
         TextView resetPassword = view.findViewById(R.id.login_resetPassword);
-
+        resetPassword.setClickable(true);
 
         fbAuth = FirebaseAuth.getInstance();
         MainActivity = new Intent(getContext(), MainActivity.class);
 
         resetPassword.setOnClickListener(c -> {
+            loginButton.setClickable(false);
+            logRegister.setClickable(false);
+            resetPassword.setClickable(false);
+            noRegistration.setClickable(false);
+
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle("Forgot password");
             View view1 = getLayoutInflater().inflate(R.layout.dialog_forgot_password, null);
@@ -90,6 +98,11 @@ public class LogInFragment extends Fragment {
         });
 
         loginButton.setOnClickListener(v -> {
+            loginButton.setClickable(false);
+            logRegister.setClickable(false);
+            resetPassword.setClickable(false);
+            noRegistration.setClickable(false);
+
             loginButton.setVisibility(View.INVISIBLE);
             loginButton.setVisibility(View.VISIBLE);
 
@@ -108,6 +121,11 @@ public class LogInFragment extends Fragment {
         });
 
         logRegister.setOnClickListener(v -> {
+            loginButton.setClickable(false);
+            logRegister.setClickable(false);
+            resetPassword.setClickable(false);
+            noRegistration.setClickable(false);
+
             Objects.requireNonNull(getActivity()).getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.auth_frame, new RegisterFragment())
@@ -115,6 +133,11 @@ public class LogInFragment extends Fragment {
         });
 
         noRegistration.setOnClickListener(v -> {
+            loginButton.setClickable(false);
+            logRegister.setClickable(false);
+            resetPassword.setClickable(false);
+            noRegistration.setClickable(false);
+
             fbAuth.signInAnonymously().addOnCompleteListener(Objects.requireNonNull(getActivity()), task -> {
                 if (task.isSuccessful()) {
                     // Sign in success, update UI with the signed-in user's information

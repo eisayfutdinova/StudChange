@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.se.omapi.Session;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,16 +23,27 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.net.Authenticator;
 import java.util.BitSet;
 import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 
 public class ApplyExchangeFragment extends Fragment {
 
-    Session session = null;
-    ProgressDialog pdialog = null;
-    Context context = null;
+
+    javax.mail.Session session=null;
+    ProgressDialog progressDialog=null;
+    Context context=null;
+    String rec;
+    String sub, text;
 
     public ApplyExchangeFragment() {
         // Required empty public constructor
@@ -83,8 +93,66 @@ public class ApplyExchangeFragment extends Fragment {
                 db.collection("applies")
                         .document()
                         .set(modelOfApply);
+                sendNew();
             }
         });
+    }
+
+    private void sendNew() {
+        context=getContext();
+        rec="nastia.khoruzhenko@gmail.com";
+        sub="Test";
+        text="Lalala";
+
+        Properties properties=new Properties();
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.socketFactory.port", "465");
+        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.port", "465");
+
+        session= Session.getDefaultInstance(properties, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication(){
+                return new PasswordAuthentication("lizasayfutdinova@gmail.com", "marina1977");
+            }
+        });
+
+        progressDialog=ProgressDialog.show(context, "", "Sending///", true);
+
+        RetrieveFeedTask task=new RetrieveFeedTask();
+        task.execute();
+    }
+
+    class RetrieveFeedTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+
+            try{
+
+                Message message=new MimeMessage(session);
+                message.setFrom(new InternetAddress("lizasayfutdinova@gmail.com"));
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(rec));
+                message.setSubject(sub);
+                message.setContent(text, "text/html; charset=utf-8");
+
+                Transport.send(message);
+
+            }catch (MessagingException e)
+            {
+                e.printStackTrace();
+            }catch (Exception ex)
+            {
+                ex.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            progressDialog.dismiss();
+
+        }
     }
 
     private void showMessage(String s) {

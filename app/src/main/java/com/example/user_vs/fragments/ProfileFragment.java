@@ -2,6 +2,9 @@ package com.example.user_vs.fragments;
 
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,6 +28,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 
 /**
@@ -46,6 +59,7 @@ public class ProfileFragment extends Fragment {
     String[] listLanguages;
     boolean[] cheakedItems;
     ArrayList<Integer> selectedLanguages = new ArrayList<>();
+
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -178,6 +192,7 @@ public class ProfileFragment extends Fragment {
 
         });
     }
+
 
     //to show toast message
     private void showMessage(String s) {

@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity
         startActivityForResult(galleryIntent, REQUESTCODE);
     }
 
+    @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -223,7 +224,6 @@ public class MainActivity extends AppCompatActivity
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
 
             FragmentTransaction ft = fragmentManager.beginTransaction();
             ft.replace(R.id.content_frame, fragment);

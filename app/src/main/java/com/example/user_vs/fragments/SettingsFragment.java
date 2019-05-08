@@ -70,14 +70,23 @@ public class SettingsFragment extends Fragment {
         newPassword = view.findViewById(R.id.settings_newPas);
         confirmPassword = view.findViewById(R.id.settings_confirmPas);
         Button changePassword = view.findViewById(R.id.settings_changePassword);
+        Button deleteAccount = view.findViewById(R.id.settings_deleteAccount);
+
+        changePassword.setClickable(true);
+        deleteAccount.setClickable(true);
+
         changePassword.setOnClickListener(v -> {
+            changePassword.setClickable(false);
+            deleteAccount.setClickable(false);
             changePassword();
         });
 
 
-        Button deleteAccount = view.findViewById(R.id.settings_deleteAccount);
         ProgressBar progressBar = view.findViewById(R.id.settings_progressBar);
         deleteAccount.setOnClickListener(v -> {
+            changePassword.setClickable(false);
+            deleteAccount.setClickable(false);
+
             AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
             dialog.setTitle("Are you sure?");
             dialog.setMessage("Deleting this account will result in completely removing your account from system amd won't be able to access the app");
@@ -122,23 +131,20 @@ public class SettingsFragment extends Fragment {
 
 // Prompt the user to re-provide their sign-in credentials
                         user.reauthenticate(credential)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Toast.makeText(getActivity(), "Re-Authentication success.", Toast.LENGTH_SHORT).show();
-                                            user.updatePassword(newStr)
-                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                            if (task.isSuccessful()) {
-                                                                Toast.makeText(getActivity(), "Password changed successfully.", Toast.LENGTH_SHORT).show();
-                                                            }
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(getActivity(), "Re-Authentication success.", Toast.LENGTH_SHORT).show();
+                                        user.updatePassword(newStr)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()) {
+                                                            Toast.makeText(getActivity(), "Password changed successfully.", Toast.LENGTH_SHORT).show();
                                                         }
-                                                    });
+                                                    }
+                                                });
 
 
-                                        }
                                     }
                                 });
                     }

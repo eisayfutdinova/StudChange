@@ -81,10 +81,16 @@ public class RegisterFragment extends Fragment {
         loadingProgress = view.findViewById(R.id.reg_progressBar);
         regButton = view.findViewById(R.id.reg_button);
         loadingProgress.setVisibility(View.INVISIBLE);
+        regLogin.setClickable(true);
+        regButton.setClickable(true);
         pickedImgUri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.drawable.registration);
         fbAuth = FirebaseAuth.getInstance();
 
         regButton.setOnClickListener(v -> {
+            regLogin.setClickable(false);
+            ImgUserPhoto.setClickable(false);
+            regButton.setClickable(false);
+
             regButton.setVisibility(View.INVISIBLE);
             loadingProgress.setVisibility(View.VISIBLE);
 
@@ -105,6 +111,9 @@ public class RegisterFragment extends Fragment {
         });
 
         regLogin.setOnClickListener(v -> {
+            regLogin.setClickable(false);
+            ImgUserPhoto.setClickable(false);
+            regButton.setClickable(false);
             getActivity().getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.auth_frame, new LogInFragment())

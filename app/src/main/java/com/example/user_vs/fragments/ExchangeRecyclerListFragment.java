@@ -2,6 +2,7 @@ package com.example.user_vs.fragments;
 
 
 import android.app.AlertDialog;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -42,6 +44,7 @@ public class ExchangeRecyclerListFragment extends Fragment {
     ArrayList<String> listOfCountries;
     List<Exchange> exchangeList;
     RecyclerView recyclerView;
+    Typeface typeface;
 
     public ExchangeRecyclerListFragment() {
         // Required empty public constructor
@@ -60,9 +63,10 @@ public class ExchangeRecyclerListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("");
 
+        typeface = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/Rubik-Light.ttf");
+
         //a list to store all the exchanges
         exchangeList = new ArrayList<>();
-        List<Exchange> exchangePrograms = new ArrayList<>();
         List<Exchange> exchangeCountries = new ArrayList<>();
         List<Exchange> finalListProgram = new ArrayList<>();
         List<Exchange> finalListCountry = new ArrayList<>();
@@ -76,7 +80,6 @@ public class ExchangeRecyclerListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         db.collection("exchange")
                 .get()
@@ -92,8 +95,9 @@ public class ExchangeRecyclerListFragment extends Fragment {
                     ExchangeAdapter adapter = new ExchangeAdapter(getContext(), exchangeList);
                     recyclerView.setAdapter(adapter);
 
-                    Button filterProgramButton = view.findViewById(R.id.filter_program);
+                    ImageView filterProgramButton = view.findViewById(R.id.filter_program);
                     TextView selectedProgramView = view.findViewById(R.id.filter_selected_programs);
+                    selectedProgramView.setTypeface(typeface);
                     HashSet<String> setOfTypes = new LinkedHashSet<>();
                     List<Exchange> exchange_programs = new ArrayList<>();
                     for (Exchange types : exchangeList) {
@@ -151,18 +155,6 @@ public class ExchangeRecyclerListFragment extends Fragment {
 
                             recyclerView.setAdapter(new ExchangeAdapter(getContext(), finalListProgram));
                             recyclerView.getAdapter().notifyDataSetChanged();
-//                            if (!finalListProgram.isEmpty()) {
-//                                recyclerView.setAdapter(new ExchangeAdapter(getContext(), finalListProgram));
-//                                recyclerView.getAdapter().notifyDataSetChanged();
-//                            } else {
-//                                if (exchangeCountries.isEmpty()) {
-//                                    recyclerView.setAdapter(adapter);
-//                                    recyclerView.getAdapter().notifyDataSetChanged();
-//                                } else {
-//                                    recyclerView.setAdapter(new ExchangeAdapter(getContext(), exchangeCountries));
-//                                    recyclerView.getAdapter().notifyDataSetChanged();
-//                                }
-//                            }
                         });
 
                         mBuilder.setNegativeButton(R.string.dismiss_label, (dialog, which) -> dialog.dismiss());
@@ -188,23 +180,14 @@ public class ExchangeRecyclerListFragment extends Fragment {
                     });
 
 
-                    Button filterCountryButton = view.findViewById(R.id.filter_country);
+                    ImageView filterCountryButton = view.findViewById(R.id.filter_country);
                     TextView selectedCountiesView = view.findViewById(R.id.filter_selected_country);
+                    selectedCountiesView.setTypeface(typeface);
                     HashSet<String> setOfCountries = new LinkedHashSet<>();
 
                     for (Exchange types : exchangeList) {
                         setOfCountries.add(types.getCountry());
                     }
-
-//                    if (exchange_programs.isEmpty()){
-//                        for (Exchange types : exchangeList) {
-//                            setOfCountries.add(types.getCountry());
-//                        }
-//                    }else{
-//                        for (Exchange types : exchangePrograms) {
-//                            setOfCountries.add(types.getCountry());
-//                        }
-//                    }
 
                     listOfCountries.addAll(setOfCountries);
 

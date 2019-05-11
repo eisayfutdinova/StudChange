@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     Uri pickedImgUri;
     ImageView userPhoto;
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         displaySelectedScreen(R.id.nav_exchange_list);
@@ -71,13 +72,19 @@ public class MainActivity extends AppCompatActivity
         if (user.getPhotoUrl() != null)
             Glide.with(this).load(user.getPhotoUrl()).into(userPhoto);
 
-        userPhoto.setOnClickListener(v->{
-            if (Build.VERSION.SDK_INT >= 22) {
-                checkAndRequestPermission();
-            } else {
-                openGallery();
-            }
-        });
+        if (user.isAnonymous()) {
+            userPhoto.setClickable(false);
+            hideItem();
+        }else{
+            userPhoto.setOnClickListener(v -> {
+                if (Build.VERSION.SDK_INT >= 22) {
+                    checkAndRequestPermission();
+                } else {
+                    openGallery();
+                }
+            });
+        }
+
 
         userName.setText(user.getDisplayName());
         userMail.setText(user.getEmail());
@@ -86,7 +93,7 @@ public class MainActivity extends AppCompatActivity
         //add this line to display menu1 when the activity is loaded
     }
 
-    private void updateUserInfo( Uri pickedImgUri, FirebaseUser currentUser) {
+    private void updateUserInfo(Uri pickedImgUri, FirebaseUser currentUser) {
         //first update user's photo to firebase and get url
 
         StorageReference fbStorage = FirebaseStorage.getInstance().getReference().child("users_photos");
@@ -225,6 +232,14 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+    }
+
+    private void hideItem()
+    {
+        navigationView = findViewById(R.id.nav_view);
+        Menu nav_Menu = navigationView.getMenu();
+        nav_Menu.findItem(R.id.nav_settings).setVisible(false);
+        nav_Menu.findItem(R.id.nav_logout).setTitle("Войти");
     }
 
 }

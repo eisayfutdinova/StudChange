@@ -3,77 +3,147 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="#ffffff"
     tools:context=".ApplyExchangeFragment">
 
     <EditText
+        android:layout_gravity="center"
         android:id="@+id/apply_email"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:hint="Your email"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:hint="Ваша почта"
+        android:textColor="@color/colorAccent"
         android:inputType="textEmailAddress"
-        android:textSize="25dp" />
+        android:textStyle="italic"
+        android:textSize="20dp" />
 
     <EditText
         android:id="@+id/apply_name"
-        android:layout_width="350dp"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:hint="Name of program"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:hint="Название программы"
+        android:textColor="@color/colorAccent"
         android:inputType="text"
-        android:textSize="25dp" />
+        android:textStyle="italic"
+        android:textSize="20dp" />
 
     <EditText
         android:id="@+id/apply_county"
-        android:layout_width="350dp"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:hint="Country"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:hint="Страна"
+        android:textColor="@color/colorAccent"
         android:inputType="text"
-        android:textSize="25dp" />
+        android:textStyle="italic"
+        android:textSize="20dp" />
 
     <EditText
+        android:textColor="@color/colorAccent"
         android:id="@+id/apply_type"
-        android:layout_width="350dp"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
         android:inputType="text"
-        android:textSize="25dp"
-        android:hint="Type of program(work/study)" />
+        android:textSize="20dp"
+        android:textStyle="italic"
+        android:hint="Тип программы(работа, обучение, стажировка)" />
 
     <EditText
+        android:textColor="@color/colorAccent"
         android:id="@+id/apply_description"
-        android:layout_width="350dp"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
         android:inputType="text"
-        android:textSize="25dp"
-        android:hint="Type of program(work/study)" />
+        android:textSize="20dp"
+        android:textStyle="italic"
+        android:hint="Цена" />
 
     <EditText
+        android:textColor="@color/colorAccent"
         android:id="@+id/apply_costInformation"
-        android:layout_width="350dp"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
         android:inputType="text"
-        android:textSize="25dp"
-        android:hint="Cost information" />
+        android:textSize="20dp"
+        android:textStyle="italic"
+        android:hint="В стоимость входит" />
 
     <EditText
+        android:textColor="@color/colorAccent"
         android:id="@+id/apply_link"
-        android:layout_width="350dp"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
         android:inputType="text"
-        android:textSize="25dp"
-        android:hint="Link of program" />
+        android:textSize="20dp"
+        android:textStyle="italic"
+        android:hint="Ссылка на стажировку" />
 
-    <Button
-        android:id="@+id/apply_button"
+    <com.github.florent37.shapeofview.shapes.CutCornerView
+        android:id="@+id/login_button_crop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Apply"/>
+        android:elevation="3dp"
+        android:layout_marginTop="65dp"
+        android:layout_gravity="center"
+        app:shape_cutCorner_bottomLeftSize="12dp"
+        app:shape_cutCorner_bottomRightSize="12dp"
+        app:shape_cutCorner_topLeftSize="12dp"
+        app:shape_cutCorner_topRightSize="12dp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            >
+
+            <ImageView
+                android:id="@+id/apply_button"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/pink_button"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="ОТПРАВИТЬ"
+                android:textSize="20dp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                />
+
+        </FrameLayout>
+
+    </com.github.florent37.shapeofview.shapes.CutCornerView>
+
 
 </LinearLayout>

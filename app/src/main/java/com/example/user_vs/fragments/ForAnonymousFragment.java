@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -22,8 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
  */
 public class ForAnonymousFragment extends Fragment {
 
-    private Button signinButton;
-    private Button signupButton;
+    private ImageView signinButton, signupButton;
 
     public ForAnonymousFragment() {
         // Required empty public constructor

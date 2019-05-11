@@ -1,6 +1,7 @@
 package com.example.user_vs.fragments;
 
 import android.app.AlertDialog;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -40,6 +41,7 @@ public class LikedFragment extends Fragment {
 
     List<Exchange> likedExchangeList;
     RecyclerView recyclerView;
+    Typeface typeface;
 
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,8 +57,10 @@ public class LikedFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTitle("Сохраненные стажировки");
+        typeface = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/Rubik-Regular.ttf");
 
         TextView textView = view.findViewById(R.id.textViewForLikes);
+        textView.setTypeface(typeface);
 
         //a list to store all the exchanges
         likedExchangeList = new ArrayList<>();

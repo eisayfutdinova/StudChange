@@ -23,23 +23,16 @@
                 android:textStyle="bold"
                 tools:text="WORK AND TRAVEL USA" />
 
-            <TextView
-                android:id="@+id/exchange_county"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_toRightOf="@id/exchange_name"
-                android:gravity="end"
-                android:layout_marginEnd="8dp"
-                tools:text="USA" />
 
             <TextView
                 android:id="@+id/exchange_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/exchange_county"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dp"
                 android:gravity="end"
                 android:layout_marginEnd="8dp"
+                android:textSize="20sp"
                 tools:text="Work" />
         </RelativeLayout>
 

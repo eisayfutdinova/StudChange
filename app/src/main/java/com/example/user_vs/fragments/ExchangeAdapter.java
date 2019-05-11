@@ -1,11 +1,13 @@
 package com.example.user_vs.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +37,7 @@ import java.util.Map;
 public class ExchangeAdapter extends RecyclerView.Adapter<ExchangeAdapter.ProductViewHolder> {
     //this context we will use to inflate the layout
     private Context mCtx;
+    Typeface typeface, typefaceDesc, typefaceLight;
 
     //we are storing all the products in a list
     private List<Exchange> productList;
@@ -53,6 +56,11 @@ public class ExchangeAdapter extends RecyclerView.Adapter<ExchangeAdapter.Produc
         //inflating and returning our view holder
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View view = inflater.inflate(R.layout.recycler_products, parent, false);
+        typeface = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/Rubik-Bold.ttf");
+        typefaceDesc = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/Rubik-Regular.ttf");
+        typefaceLight = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/Rubik-Light.ttf");
+
+
         return new ProductViewHolder(view);
     }
 
@@ -63,10 +71,17 @@ public class ExchangeAdapter extends RecyclerView.Adapter<ExchangeAdapter.Produc
 
         //binding the data with the viewholder views
         holder.textViewTitle.setText(product.getName());
+        holder.textViewTitle.setTypeface(typeface);
+
         holder.textViewShortDesc.setText(product.getDescription());
+        holder.textViewShortDesc.setTypeface(typefaceDesc);
+
         holder.textViewPrice.setText(product.getCost());
+        holder.textViewPrice.setTypeface(typefaceLight);
+
         holder.textViewType.setText(product.getType());
-        holder.textViewCountry.setText(product.getCountry());
+        holder.textViewType.setTypeface(typefaceLight);
+
         holder.itemView.setOnClickListener(v -> {
             DetailsExchangeFragment detailsExchangeFragment = DetailsExchangeFragment.newInstance(product.getExchangeId());
             ((MainActivity) mCtx).getSupportFragmentManager()
@@ -126,7 +141,7 @@ public class ExchangeAdapter extends RecyclerView.Adapter<ExchangeAdapter.Produc
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewTitle, textViewCountry, textViewShortDesc, textViewPrice, textViewType;
+        TextView textViewTitle, textViewShortDesc, textViewPrice, textViewType;
         LikeButton likeButton;
 
         public ProductViewHolder(View itemView) {
@@ -136,7 +151,7 @@ public class ExchangeAdapter extends RecyclerView.Adapter<ExchangeAdapter.Produc
             textViewShortDesc = itemView.findViewById(R.id.card_description);
             textViewType = itemView.findViewById(R.id.card_type);
             textViewPrice = itemView.findViewById(R.id.card_cost);
-            textViewCountry = itemView.findViewById(R.id.card_country);
+            //textViewCountry = itemView.findViewById(R.id.card_country);
             likeButton = itemView.findViewById(R.id.like_button);
         }
     }

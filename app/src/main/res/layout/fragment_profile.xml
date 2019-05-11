@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="vertical"
     tools:context=".ProfileFragment">
 
@@ -13,7 +15,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
-        android:hint="Full name" />
+        android:hint="ФИО"
+        android:textColor="@color/colorAccent" />
 
     <EditText
         android:id="@+id/profile_mail"
@@ -21,7 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/colorAccent" />
 
     <RadioGroup
         android:id="@+id/profile_genderGroup"
@@ -37,7 +41,7 @@
             android:layout_gravity="left"
             android:layout_weight="1"
             android:checked="true"
-            android:text="Male"
+            android:text="Мужчина"
             android:textSize="14dp" />
 
         <RadioButton
@@ -47,7 +51,7 @@
             android:layout_gravity="right"
             android:layout_weight="1"
             android:checked="false"
-            android:text="Female"
+            android:text="Женщина"
             android:textSize="14dp" />
     </RadioGroup>
 
@@ -58,7 +62,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
-        android:hint="Country" />
+        android:hint="Страна проживания"
+        android:textColor="@color/colorAccent" />
 
     <EditText
         android:id="@+id/profile_university"
@@ -67,7 +72,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
-        android:hint="University" />
+        android:hint="Учебное заведение"
+        android:textColor="@color/colorAccent" />
 
     <EditText
         android:id="@+id/profile_age"
@@ -76,37 +82,86 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
-        android:hint="age"
-        android:inputType="number" />
+        android:hint="Возраст"
+        android:inputType="number"
+        android:textColor="@color/colorAccent" />
 
-    <Button
-        android:id="@+id/profile_button_lang"
-        android:layout_width="144dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="8dp"
+    <com.github.florent37.shapeofview.shapes.CutCornerView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Languages" />
+        android:elevation="3dp"
+        app:shape_cutCorner_bottomLeftSize="8dp"
+        app:shape_cutCorner_bottomRightSize="8dp"
+        app:shape_cutCorner_topLeftSize="8dp"
+        app:shape_cutCorner_topRightSize="8dp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark">
+
+            <ImageView
+                android:id="@+id/profile_button_lang"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/pink_button" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="Языки"
+                android:textColor="#ffffff" />
+
+        </FrameLayout>
+
+    </com.github.florent37.shapeofview.shapes.CutCornerView>
+
 
     <TextView
         android:id="@+id/profile_list_lang"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
-
-    <Button
-        android:id="@+id/profile_saveButton"
-        android:layout_width="144dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:textColor="@color/colorAccent" />
+
+    <com.github.florent37.shapeofview.shapes.CutCornerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:layout_gravity="center"
-        android:background="@drawable/reg_btn_style"
-        android:text="Save" />
+        android:elevation="3dp"
+        app:shape_cutCorner_bottomLeftSize="8dp"
+        app:shape_cutCorner_bottomRightSize="8dp"
+        app:shape_cutCorner_topLeftSize="8dp"
+        app:shape_cutCorner_topRightSize="8dp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark">
+
+            <ImageView
+                android:id="@+id/profile_saveButton"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/pink_button" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:text="Сохранить"
+                android:textColor="@color/colorAccent" />
+
+        </FrameLayout>
+    </com.github.florent37.shapeofview.shapes.CutCornerView>
+
 
 
 </LinearLayout>

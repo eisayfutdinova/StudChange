@@ -22,9 +22,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:typeface="sans"
+                android:textSize="25sp"
+                android:textColor="@color/colorAccent"
                 tools:text="WORK AND TRAVEL USA" />
 
             <TextView
@@ -32,25 +31,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:layout_toEndOf="@+id/card_Name"
+                android:layout_below="@+id/card_Name"
+                android:layout_marginStart="8dp"
                 android:textSize="18sp"
                 android:textStyle="italic"
                 tools:text="Work" />
 
-            <TextView
-                android:id="@+id/card_country"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/card_Name"
-                android:layout_marginStart="8dp"
-                android:textSize="18sp"
-                tools:text="USA" />
 
             <com.like.LikeButton
                 app:icon_type="heart"
-                app:icon_size="12dp"
+                app:icon_size="11dp"
                 android:id="@+id/like_button"
-                android:layout_toRightOf="@id/card_type"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </RelativeLayout>
@@ -62,12 +55,15 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:textSize="16sp"
+            android:textColor="@color/colorAccent"
             tools:text="Это попытка пожить жизнью французского студента на каникулах — ты сможешь неплохо заработать и получить много новых впечатлений!" />
 
         <TextView
             android:id="@+id/card_cost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             tools:text="от 1439$" />
     </LinearLayout>
 

@@ -1,8 +1,9 @@
 <resources>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.DarkActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="alertDialogStyle">@style/alert_dialog</item>
     </style>
 </resources>

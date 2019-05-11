@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -66,7 +67,7 @@ public class ApplyExchangeFragment extends Fragment {
 
 
         EditText apply_name, apply_country, apply_type, apply_cost, apply_link, apply_desc, apply_email;
-        Button applyBtn;
+        ImageView applyBtn;
 
         apply_name = view.findViewById(R.id.apply_name);
         apply_cost = view.findViewById(R.id.apply_costInformation);

@@ -35,6 +35,9 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.yalantis.ucrop.UCrop;
+
+import java.io.File;
 
 import static android.app.Activity.RESULT_OK;
 import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
@@ -49,10 +52,11 @@ public class RegisterFragment extends Fragment {
     static int PReqCode = 1;
     static int REQUESTCODE = 1;
     Uri pickedImgUri;
+    String SAMPLE_CROPPED_IMG_NAME = "SampleCropImg";
 
     private EditText userEmail, userPassword, userPassword2, userName;
     private ProgressBar loadingProgress;
-    private Button regButton;
+    private ImageView regButton, regLogin;
 
     private FirebaseAuth fbAuth;
 
@@ -72,7 +76,7 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button regLogin = view.findViewById(R.id.reg_sign_in);
+        regLogin = view.findViewById(R.id.reg_sign_in);
 
         userEmail = view.findViewById(R.id.reg_mail);
         userPassword = view.findViewById(R.id.reg_password);
@@ -81,16 +85,14 @@ public class RegisterFragment extends Fragment {
         loadingProgress = view.findViewById(R.id.reg_progressBar);
         regButton = view.findViewById(R.id.reg_button);
         loadingProgress.setVisibility(View.INVISIBLE);
-        regLogin.setClickable(true);
-        regButton.setClickable(true);
         pickedImgUri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.drawable.registration);
         fbAuth = FirebaseAuth.getInstance();
 
-        regButton.setOnClickListener(v -> {
-            regLogin.setClickable(false);
-            ImgUserPhoto.setClickable(false);
-            regButton.setClickable(false);
+        buttonClickTrue();
 
+        regButton.setOnClickListener(v -> {
+
+            buttonClickFalse();
             regButton.setVisibility(View.INVISIBLE);
             loadingProgress.setVisibility(View.VISIBLE);
 
@@ -101,9 +103,9 @@ public class RegisterFragment extends Fragment {
 
             if (email.isEmpty() || password.isEmpty() || name.isEmpty() || !password.equals(password2)) {
                 showMessage("Please, verify all fields correctly");
-
+                buttonClickTrue();
                 regButton.setVisibility(View.VISIBLE);
-                loadingProgress.setVisibility(View.VISIBLE);
+                loadingProgress.setVisibility(View.INVISIBLE);
             } else {
                 //creating users acount
                 CreateUserAccount(email, name, password);
@@ -111,13 +113,12 @@ public class RegisterFragment extends Fragment {
         });
 
         regLogin.setOnClickListener(v -> {
-            regLogin.setClickable(false);
-            ImgUserPhoto.setClickable(false);
-            regButton.setClickable(false);
+            buttonClickFalse();
             getActivity().getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.auth_frame, new LogInFragment())
                     .commit();
+            buttonClickTrue();
         });
 
         ImgUserPhoto = view.findViewById(R.id.reg_usersPhoto);
@@ -193,13 +194,49 @@ public class RegisterFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK && requestCode == REQUESTCODE && data != null) {
+        if (resultCode == RESULT_OK && requestCode == REQUESTCODE) {
             // user picked an image successfully
             // we need to save its reference to Uri variable
             pickedImgUri = data.getData();
-            ImgUserPhoto.setImageURI(pickedImgUri);
+            if (pickedImgUri != null) {
+                startCrop(pickedImgUri);
+                ImgUserPhoto.setImageURI(pickedImgUri);
+            }
 
+        } else if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
+            Uri imageUriResultCrop = UCrop.getOutput(data);
+            if (imageUriResultCrop != null) {
+                ImgUserPhoto.setImageURI(imageUriResultCrop);
+            }
         }
+    }
+
+    private void startCrop(@NonNull Uri uri) {
+        String destinationFileName = SAMPLE_CROPPED_IMG_NAME;
+        destinationFileName += ".jpg";
+
+        UCrop uCrop = UCrop.of(uri, Uri.fromFile(new File(getContext().getCacheDir(), destinationFileName)));
+
+        uCrop.withAspectRatio(1, 1);
+        uCrop.withMaxResultSize(50, 50);
+        uCrop.withOptions(getCropOptions());
+        uCrop.start(getActivity());
+    }
+
+    private UCrop.Options getCropOptions() {
+        UCrop.Options options = new UCrop.Options();
+        options.setCompressionQuality(70);
+
+        //UI
+        options.setHideBottomControls(false);
+        options.setFreeStyleCropEnabled(true);
+
+        //Color
+        options.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+        options.setToolbarColor(getResources().getColor(R.color.colorPrimary));
+        options.setToolbarTitle("Обрезать изображение");
+
+        return options;
     }
 
     private void openGallery() {
@@ -226,4 +263,21 @@ public class RegisterFragment extends Fragment {
 
     }
 
+    private void buttonClickTrue() {
+        userName.setClickable(true);
+        userEmail.setClickable(true);
+        userPassword.setClickable(true);
+        userPassword2.setClickable(true);
+        regButton.setClickable(true);
+        regLogin.setClickable(true);
+    }
+
+    private void buttonClickFalse() {
+        userName.setClickable(false);
+        userEmail.setClickable(false);
+        userPassword.setClickable(false);
+        userPassword2.setClickable(false);
+        regButton.setClickable(false);
+        regLogin.setClickable(false);
+    }
 }

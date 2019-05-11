@@ -14,34 +14,93 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:text="This option is available for registered users only"
+        android:text="Данная опция доступна только зарегистрированным пользователям"
         android:textAlignment="center"
-        android:textColor="#000"
-        android:textSize="25sp" />
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/guest_sign_in"
-        android:layout_width="144dp"
-        android:layout_height="51dp"
+
+    <com.github.florent37.shapeofview.shapes.CutCornerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
+        android:layout_gravity="center"
         android:layout_marginStart="8dp"
         android:layout_marginTop="150dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:layout_gravity="center"
-        android:background="@drawable/reg_btn_style"
-        android:text="Sign in" />
+        app:shape_cutCorner_bottomLeftSize="12dp"
+        app:shape_cutCorner_bottomRightSize="12dp"
+        app:shape_cutCorner_topLeftSize="12dp"
+        app:shape_cutCorner_topRightSize="12dp">
 
-    <Button
-        android:id="@+id/guest_sign_up"
-        android:layout_width="144dp"
-        android:layout_height="51dp"
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            >
+
+            <ImageView
+                android:id="@+id/guest_sign_in"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/pink_button"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Войти"
+                android:textSize="18dp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                />
+
+        </FrameLayout>
+
+    </com.github.florent37.shapeofview.shapes.CutCornerView>
+
+    <com.github.florent37.shapeofview.shapes.CutCornerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
+        android:layout_gravity="center"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:layout_gravity="center"
-        android:background="@drawable/reg_btn_style"
-        android:text="Sign up" />
+        app:shape_cutCorner_bottomLeftSize="12dp"
+        app:shape_cutCorner_bottomRightSize="12dp"
+        app:shape_cutCorner_topLeftSize="12dp"
+        app:shape_cutCorner_topRightSize="12dp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            >
+
+            <ImageView
+                android:id="@+id/guest_sign_up"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/white_button"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Еще нет аккаунта?"
+                android:textSize="18dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_gravity="center"
+                />
+
+        </FrameLayout>
+
+    </com.github.florent37.shapeofview.shapes.CutCornerView>
 
 </LinearLayout>

@@ -56,7 +56,6 @@ public class DetailsExchangeFragment extends Fragment {
                     Exchange exchange = queryDocSnap.toObject(Exchange.class);
                     assert exchange != null;
                     ((TextView) Objects.requireNonNull(getActivity()).findViewById(R.id.exchange_name)).setText(exchange.getName());
-                    ((TextView)getActivity().findViewById(R.id.exchange_county)).setText(exchange.getCountry());
                     ((TextView)getActivity().findViewById(R.id.exchange_type)).setText(exchange.getType());
                     ((TextView)getActivity().findViewById(R.id.exchange_fulldescription)).setText(exchange.getFulldescription());
                     ((TextView)getActivity().findViewById(R.id.exchange_link)).setText(exchange.getLink());

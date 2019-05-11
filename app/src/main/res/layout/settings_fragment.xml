@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
 
 
     <EditText
@@ -12,8 +14,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="3dp"
-        android:inputType="textPassword"
-        android:hint="current password" />
+        android:hint="Текущий пароль"
+        android:inputType="textPassword" />
+
     <EditText
         android:id="@+id/settings_newPas"
         android:layout_width="match_parent"
@@ -21,8 +24,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="8dp"
-        android:inputType="textPassword"
-        android:hint="new password" />
+        android:hint="Новый пароль"
+        android:inputType="textPassword" />
+
     <EditText
         android:id="@+id/settings_confirmPas"
         android:layout_width="match_parent"
@@ -30,38 +34,92 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="8dp"
-        android:inputType="textPassword"
-        android:hint="repeat password" />
+        android:hint="Повторите новый пароль"
+        android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/settings_changePassword"
-        android:layout_width="160dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="8dp"
+    <com.github.florent37.shapeofview.shapes.CutCornerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="openGallery"
-        android:text="Change password" />
+        android:elevation="3dp"
+        app:shape_cutCorner_bottomLeftSize="8dp"
+        app:shape_cutCorner_bottomRightSize="8dp"
+        app:shape_cutCorner_topLeftSize="8dp"
+        app:shape_cutCorner_topRightSize="8dp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark">
+
+            <ImageView
+                android:id="@+id/settings_changePassword"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/pink_button" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="ИЗМЕНИТЬ ПАРОЛЬ"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
+
+        </FrameLayout>
+
+    </com.github.florent37.shapeofview.shapes.CutCornerView>
 
     <ProgressBar
         android:id="@+id/settings_progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:visibility="gone"
-        android:layout_gravity="center"
-        />
+        android:visibility="gone" />
 
-    <Button
-        android:id="@+id/settings_deleteAccount"
-        android:layout_width="160dp"
-        android:layout_height="51dp"
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="170dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="60dp"
+        android:text="Удалить аакаунт"
+        android:textColor="#000000"
+        android:textSize="20dp" />
+
+    <com.github.florent37.shapeofview.shapes.CutCornerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:onClick="openGallery"
-        android:text="Delete account" />
+        android:layout_marginTop="15dp"
+        android:elevation="3dp"
+        app:shape_cutCorner_bottomLeftSize="8dp"
+        app:shape_cutCorner_bottomRightSize="8dp"
+        app:shape_cutCorner_topLeftSize="8dp"
+        app:shape_cutCorner_topRightSize="8dp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark">
+
+            <ImageView
+                android:id="@+id/settings_deleteAccount"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/pink_button" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="УДАЛИТЬ АККАУНТ"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold" />
+
+        </FrameLayout>
+    </com.github.florent37.shapeofview.shapes.CutCornerView>
 
 
 </LinearLayout>

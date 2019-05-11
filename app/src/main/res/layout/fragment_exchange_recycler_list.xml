@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorPrimary"
     tools:context=".ExchangeRecyclerListFragment">
 
     <SearchView
@@ -23,17 +24,48 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/filter_program"
-                android:layout_width="220dp"
+            <com.github.florent37.shapeofview.shapes.CutCornerView
+                android:id="@+id/filter_program_crop"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Выбрать программу" />
+                android:elevation="3dp"
+                android:layout_marginStart="8dp"
+                app:shape_cutCorner_bottomLeftSize="6dp"
+                app:shape_cutCorner_bottomRightSize="6dp"
+                app:shape_cutCorner_topLeftSize="6dp"
+                app:shape_cutCorner_topRightSize="6dp">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    >
+
+                    <ImageView
+                        android:id="@+id/filter_program"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/white_button"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Выбрать программу"
+                        android:textColor="@color/colorAccent"
+                        android:layout_gravity="center"
+                        />
+
+                </FrameLayout>
+
+            </com.github.florent37.shapeofview.shapes.CutCornerView>
 
             <TextView
                 android:id="@+id/filter_selected_programs"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/filter_program"
+                android:layout_below="@+id/filter_program_crop"
+                android:textColor="@color/colorAccent"
                 tools:text="1234567" />
 
         </RelativeLayout>
@@ -42,17 +74,48 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/filter_country"
-                android:layout_width="220dp"
+            <com.github.florent37.shapeofview.shapes.CutCornerView
+                android:id="@+id/filter_country_crop"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Выбрать страну" />
+                android:elevation="3dp"
+                android:layout_marginEnd="8dp"
+                app:shape_cutCorner_bottomLeftSize="6dp"
+                app:shape_cutCorner_bottomRightSize="6dp"
+                app:shape_cutCorner_topLeftSize="6dp"
+                app:shape_cutCorner_topRightSize="6dp">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    >
+
+                    <ImageView
+                        android:id="@+id/filter_country"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/white_button"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Выбрать страну"
+                        android:textColor="@color/colorAccent"
+                        android:layout_gravity="center"
+                        />
+
+                </FrameLayout>
+
+            </com.github.florent37.shapeofview.shapes.CutCornerView>
 
             <TextView
                 android:id="@+id/filter_selected_country"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/filter_country"
+                android:layout_below="@+id/filter_country_crop"
+                android:textColor="@color/colorAccent"
                 tools:text="333" />
 
         </RelativeLayout>

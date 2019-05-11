@@ -69,8 +69,8 @@ public class SettingsFragment extends Fragment {
         current = view.findViewById(R.id.settings_currentPas);
         newPassword = view.findViewById(R.id.settings_newPas);
         confirmPassword = view.findViewById(R.id.settings_confirmPas);
-        Button changePassword = view.findViewById(R.id.settings_changePassword);
-        Button deleteAccount = view.findViewById(R.id.settings_deleteAccount);
+        ImageView changePassword = view.findViewById(R.id.settings_changePassword);
+        ImageView deleteAccount = view.findViewById(R.id.settings_deleteAccount);
 
         changePassword.setClickable(true);
         deleteAccount.setClickable(true);

@@ -17,7 +17,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/name_program" />
+        app:srcCompat="@drawable/welcome" />
+
     <EditText
         android:id="@+id/login_email"
         android:layout_width="265dp"
@@ -26,8 +27,7 @@
         android:layout_marginTop="235dp"
         android:layout_marginEnd="8dp"
         android:padding="16dp"
-        android:textColor="@android:color/white"
-        android:textColorHint="#D3D3D3"
+        android:textColor="@color/colorAccent"
         android:textSize="18sp"
         android:ems="10"
         android:hint="Email"
@@ -44,8 +44,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:padding="16dp"
-        android:textColor="@android:color/white"
-        android:textColorHint="#D3D3D3"
+        android:textColor="@color/colorAccent"
         android:textSize="18sp"
         android:ems="10"
         android:hint="Password"
@@ -56,7 +55,7 @@
 
     <TextView
         android:id="@+id/login_resetPassword"
-        android:textColor="@android:color/white"
+        android:textColor="@color/colorAccent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Forgot password?"
@@ -64,64 +63,112 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_password" />
-        />
+    />
 
-    <Button
-        android:id="@+id/login_button"
-        android:layout_width="0dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Login to Account"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:backgroundTint="@color/colorAccent"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <com.github.florent37.shapeofview.shapes.CutCornerView
+        android:id="@+id/login_button_crop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
+        app:layout_constraintBottom_toTopOf="@id/log_register_crop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_resetPassword"
-        app:layout_constraintVertical_bias="0.307" />
+        app:layout_constraintTop_toBottomOf="@id/login_resetPassword"
+        android:layout_marginTop="65dp"
+        app:shape_cutCorner_bottomLeftSize="12dp"
+        app:shape_cutCorner_bottomRightSize="12dp"
+        app:shape_cutCorner_topLeftSize="12dp"
+        app:shape_cutCorner_topRightSize="12dp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            >
+
+            <ImageView
+                android:id="@+id/login_button"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/pink_button"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="LOGIN TO ACCOUNT"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                />
+
+        </FrameLayout>
+
+    </com.github.florent37.shapeofview.shapes.CutCornerView>
+
 
     <ProgressBar
         android:id="@+id/login_progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/login_button"
-        app:layout_constraintEnd_toEndOf="@+id/login_button"
-        app:layout_constraintStart_toStartOf="@+id/login_button"
-        app:layout_constraintTop_toTopOf="@+id/login_button" />
+        app:layout_constraintBottom_toBottomOf="@+id/login_button_crop"
+        app:layout_constraintEnd_toEndOf="@+id/login_button_crop"
+        app:layout_constraintStart_toStartOf="@+id/login_button_crop"
+        app:layout_constraintTop_toTopOf="@+id/login_button_crop" />
 
-
-    <Button
-        android:id="@+id/log_register"
-        android:layout_width="0dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Need a new Account?"
-        android:textColor="@color/colorAccent"
-        android:textStyle="bold"
-        android:backgroundTint="@android:color/white"
+    <com.github.florent37.shapeofview.shapes.CutCornerView
+        android:id="@+id/log_register_crop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_button" />
+        app:layout_constraintTop_toBottomOf="@id/login_button_crop"
+        android:layout_marginTop="25dp"
+        app:shape_cutCorner_bottomLeftSize="12dp"
+        app:shape_cutCorner_bottomRightSize="12dp"
+        app:shape_cutCorner_topLeftSize="12dp"
+        app:shape_cutCorner_topRightSize="12dp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            >
+
+            <ImageView
+                android:id="@+id/log_register"
+                android:layout_width="240dp"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/white_button"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NEED A NEW ACCOUNT?"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                />
+
+        </FrameLayout>
+
+    </com.github.florent37.shapeofview.shapes.CutCornerView>
 
 
     <TextView
         android:id="@+id/log_NoRegistration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
         android:layout_marginTop="24dp"
         android:text="Continue as guest"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/log_register"
+        app:layout_constraintTop_toBottomOf="@+id/log_register_crop"
+        app:layout_constraintBottom_toBottomOf="parent"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ package com.example.user_vs.fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +43,10 @@ public class LogInFragment extends Fragment {
 
     private EditText userEmail, userPassword;
     private ProgressBar loadingProgress;
-    private Button loginButton;
+    private ImageView loginButton, logRegister;
+
+    TextView resetPassword, noRegistration;
+    Typeface typeface, typefaceDesc;
 
     private FirebaseAuth fbAuth;
 
@@ -61,28 +66,27 @@ public class LogInFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        typeface = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/Rubik-Regular.ttf");
 
         userEmail = view.findViewById(R.id.login_email);
         userPassword = view.findViewById(R.id.login_password);
         loadingProgress = view.findViewById(R.id.login_progressBar);
         loginButton = view.findViewById(R.id.login_button);
-        loginButton.setClickable(true);
 
-        Button logRegister = view.findViewById(R.id.log_register);
-        logRegister.setClickable(true);
-        TextView noRegistration = view.findViewById(R.id.log_NoRegistration);
-        noRegistration.setClickable(true);
-        TextView resetPassword = view.findViewById(R.id.login_resetPassword);
-        resetPassword.setClickable(true);
+        logRegister = view.findViewById(R.id.log_register);
+        noRegistration = view.findViewById(R.id.log_NoRegistration);
+        resetPassword = view.findViewById(R.id.login_resetPassword);
 
+        resetPassword.setTypeface(typeface);
+        noRegistration.setTypeface(typeface);
+        userEmail.setTypeface(typeface);
+
+        buttonClickTrue();
         fbAuth = FirebaseAuth.getInstance();
         MainActivity = new Intent(getContext(), MainActivity.class);
 
         resetPassword.setOnClickListener(c -> {
-            loginButton.setClickable(false);
-            logRegister.setClickable(false);
-            resetPassword.setClickable(false);
-            noRegistration.setClickable(false);
+            buttonClickFalse();
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle("Forgot password");
@@ -90,18 +94,18 @@ public class LogInFragment extends Fragment {
             EditText username = view1.findViewById((R.id.forgot_userMail));
             builder.setView(view1);
             builder.setPositiveButton("Reset", (dialog, which) -> {
+                buttonClickTrue();
                 forgotPassword(username);
             });
             builder.setNegativeButton("Close", (dialog, which) -> {
+                buttonClickTrue();
             });
             builder.show();
+            buttonClickTrue();
         });
 
         loginButton.setOnClickListener(v -> {
-            loginButton.setClickable(false);
-            logRegister.setClickable(false);
-            resetPassword.setClickable(false);
-            noRegistration.setClickable(false);
+            buttonClickFalse();
 
             loginButton.setVisibility(View.INVISIBLE);
             loginButton.setVisibility(View.VISIBLE);
@@ -112,6 +116,7 @@ public class LogInFragment extends Fragment {
             if (email.isEmpty() || password.isEmpty()) {
                 showMessage("Please, verify all fields correctly");
 
+                buttonClickTrue();
                 loginButton.setVisibility(View.VISIBLE);
                 loadingProgress.setVisibility(View.VISIBLE);
             } else {
@@ -121,22 +126,17 @@ public class LogInFragment extends Fragment {
         });
 
         logRegister.setOnClickListener(v -> {
-            loginButton.setClickable(false);
-            logRegister.setClickable(false);
-            resetPassword.setClickable(false);
-            noRegistration.setClickable(false);
+            buttonClickFalse();
 
             Objects.requireNonNull(getActivity()).getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.auth_frame, new RegisterFragment())
                     .commit();
+
         });
 
         noRegistration.setOnClickListener(v -> {
-            loginButton.setClickable(false);
-            logRegister.setClickable(false);
-            resetPassword.setClickable(false);
-            noRegistration.setClickable(false);
+            buttonClickFalse();
 
             fbAuth.signInAnonymously().addOnCompleteListener(Objects.requireNonNull(getActivity()), task -> {
                 if (task.isSuccessful()) {
@@ -148,13 +148,14 @@ public class LogInFragment extends Fragment {
                     Log.w(TAG, "signInAnonymously:failure", task.getException());
                     Toast.makeText(getActivity(), "Authentication failed.",
                             Toast.LENGTH_SHORT).show();
+                    buttonClickTrue();
                 }
             });
         });
     }
 
     private void forgotPassword(EditText username) {
-        if (username.getText().toString().isEmpty()){
+        if (username.getText().toString().isEmpty()) {
             return;
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(username.getText().toString()).matches()) {
@@ -163,7 +164,7 @@ public class LogInFragment extends Fragment {
         fbAuth.sendPasswordResetEmail(username.getText().toString())
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(getActivity(),"Email sent.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Email sent.", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -176,6 +177,7 @@ public class LogInFragment extends Fragment {
                 updateUI();
             } else {
                 showMessage(Objects.requireNonNull(task.getException()).getMessage());
+                buttonClickTrue();
                 loginButton.setVisibility(View.VISIBLE);
                 loadingProgress.setVisibility(View.INVISIBLE);
             }
@@ -196,5 +198,19 @@ public class LogInFragment extends Fragment {
 
     private void showMessage(String s) {
         Toast.makeText(getActivity(), s, Toast.LENGTH_LONG).show();
+    }
+
+    private void buttonClickTrue() {
+        loginButton.setClickable(true);
+        logRegister.setClickable(true);
+        resetPassword.setClickable(true);
+        noRegistration.setClickable(true);
+    }
+
+    private void buttonClickFalse() {
+        loginButton.setClickable(false);
+        logRegister.setClickable(false);
+        resetPassword.setClickable(false);
+        noRegistration.setClickable(false);
     }
 }

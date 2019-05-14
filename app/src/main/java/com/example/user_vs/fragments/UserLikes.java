@@ -18,4 +18,5 @@ public class UserLikes {
     public String getExchangeId() {
         return exchangeId;
     }
+
 }

@@ -39,14 +39,12 @@ import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
  */
 public class LogInFragment extends Fragment {
 
-    private Intent MainActivity;
-
     private EditText userEmail, userPassword;
     private ProgressBar loadingProgress;
     private ImageView loginButton, logRegister;
 
     TextView resetPassword, noRegistration;
-    Typeface typeface, typefaceDesc;
+    Typeface typeface;
 
     private FirebaseAuth fbAuth;
 
@@ -83,7 +81,6 @@ public class LogInFragment extends Fragment {
 
         buttonClickTrue();
         fbAuth = FirebaseAuth.getInstance();
-        MainActivity = new Intent(getContext(), MainActivity.class);
 
         resetPassword.setOnClickListener(c -> {
             buttonClickFalse();
@@ -100,15 +97,13 @@ public class LogInFragment extends Fragment {
             builder.setNegativeButton("Close", (dialog, which) -> {
                 buttonClickTrue();
             });
+
             builder.show();
             buttonClickTrue();
         });
 
         loginButton.setOnClickListener(v -> {
             buttonClickFalse();
-
-            loginButton.setVisibility(View.INVISIBLE);
-            loginButton.setVisibility(View.VISIBLE);
 
             final String email = userEmail.getText().toString();
             final String password = userPassword.getText().toString();
@@ -117,10 +112,9 @@ public class LogInFragment extends Fragment {
                 showMessage("Please, verify all fields correctly");
 
                 buttonClickTrue();
-                loginButton.setVisibility(View.VISIBLE);
-                loadingProgress.setVisibility(View.VISIBLE);
             } else {
                 CheckAccount(email, password);
+                loadingProgress.setVisibility(View.VISIBLE);
             }
 
         });
@@ -137,6 +131,7 @@ public class LogInFragment extends Fragment {
 
         noRegistration.setOnClickListener(v -> {
             buttonClickFalse();
+            loadingProgress.setVisibility(View.VISIBLE);
 
             fbAuth.signInAnonymously().addOnCompleteListener(Objects.requireNonNull(getActivity()), task -> {
                 if (task.isSuccessful()) {
@@ -148,6 +143,7 @@ public class LogInFragment extends Fragment {
                     Log.w(TAG, "signInAnonymously:failure", task.getException());
                     Toast.makeText(getActivity(), "Authentication failed.",
                             Toast.LENGTH_SHORT).show();
+                    loadingProgress.setVisibility(View.INVISIBLE);
                     buttonClickTrue();
                 }
             });
@@ -173,12 +169,10 @@ public class LogInFragment extends Fragment {
         fbAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 loadingProgress.setVisibility(View.INVISIBLE);
-                loginButton.setVisibility(View.VISIBLE);
                 updateUI();
             } else {
                 showMessage(Objects.requireNonNull(task.getException()).getMessage());
                 buttonClickTrue();
-                loginButton.setVisibility(View.VISIBLE);
                 loadingProgress.setVisibility(View.INVISIBLE);
             }
         });

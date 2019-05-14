@@ -40,9 +40,9 @@ import static com.example.user_vs.fragments.RegisterFragment.REQUESTCODE;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     Uri pickedImgUri;
-    ImageView userPhoto;
+    private ImageView userPhoto;
     NavigationView navigationView;
 
     @Override
@@ -218,6 +218,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_apply_ex:
                 fragment = new ApplyExchangeFragment();
                 break;
+            case R.id.nav_map:
+                Intent mapActivity = new Intent(this, MapsActivity.class);
+                startActivity(mapActivity);
         }
 
         //replacing the fragment

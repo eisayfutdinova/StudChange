@@ -51,13 +51,13 @@ public class ProfileFragment extends Fragment {
     private EditText fullName, country, university, age, mail;
 
     private RadioGroup radioSexGroup;
-    String gender;
+    private String gender;
 
-    TextView languages;
-    ImageView languageButton, saveButton;
-    String[] listLanguages;
-    boolean[] cheakedItems;
-    ArrayList<Integer> selectedLanguages = new ArrayList<>();
+    private TextView languages;
+    private ImageView languageButton, saveButton;
+    private String[] listLanguages;
+    private boolean[] cheakedItems;
+    private ArrayList<Integer> selectedLanguages = new ArrayList<>();
 
 
     public ProfileFragment() {

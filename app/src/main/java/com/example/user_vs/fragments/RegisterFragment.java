@@ -85,7 +85,7 @@ public class RegisterFragment extends Fragment {
         loadingProgress = view.findViewById(R.id.reg_progressBar);
         regButton = view.findViewById(R.id.reg_button);
         loadingProgress.setVisibility(View.INVISIBLE);
-        pickedImgUri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.drawable.registration);
+        pickedImgUri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.drawable.avatar);
         fbAuth = FirebaseAuth.getInstance();
 
         buttonClickTrue();
@@ -93,7 +93,6 @@ public class RegisterFragment extends Fragment {
         regButton.setOnClickListener(v -> {
 
             buttonClickFalse();
-            regButton.setVisibility(View.INVISIBLE);
             loadingProgress.setVisibility(View.VISIBLE);
 
             final String email = userEmail.getText().toString();

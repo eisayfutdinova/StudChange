@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -11,61 +13,140 @@
         android:scrollbarAlwaysDrawVerticalTrack="true"
         tools:context=".DetailsExchangeFragment">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/exchange_name"
+        <TextView
+            android:id="@+id/exchange_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:textColor="@color/colorAccent"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            tools:text="WORK AND TRAVEL USA" />
+
+
+        <TextView
+            android:id="@+id/exchange_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="end"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            tools:text="Work" />
+
+        <com.github.florent37.shapeofview.shapes.CutCornerView
+            android:id="@+id/filter_program_crop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:elevation="5dp"
+            android:layout_marginEnd="6dp"
+            app:shape_cutCorner_bottomLeftSize="10dp"
+            app:shape_cutCorner_bottomRightSize="10dp"
+            app:shape_cutCorner_topLeftSize="10dp"
+            app:shape_cutCorner_topRightSize="10dp">
+
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="35sp"
-                android:textStyle="bold"
-                tools:text="WORK AND TRAVEL USA" />
+                android:background="#ffffff">
+
+                <TextView
+                    android:id="@+id/exchange_fulldescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="15dp"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp"
+                    tools:text="Программа Work and Travel состоит из двух частей, первая часть – это работа. Каждый студент имеет право работать ТОЛЬКО в период с 15 мая по 15 сентября, даты работы каждый студент может подбирать индивидуально, согласно планам сдачи летней сессии и личных планов, но в рамках периода 15 мая - 15 сентября." />
 
 
-            <TextView
-                android:id="@+id/exchange_type"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="8dp"
-                android:gravity="end"
-                android:layout_marginEnd="8dp"
-                android:textSize="20sp"
-                tools:text="Work" />
-        </RelativeLayout>
+            </FrameLayout>
 
-        <TextView
-            android:id="@+id/exchange_fulldescription"
-            android:layout_width="match_parent"
+        </com.github.florent37.shapeofview.shapes.CutCornerView>
+
+        <com.github.florent37.shapeofview.shapes.CutCornerView
+            android:id="@+id/ff"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            tools:text="Программа Work and Travel состоит из двух частей, первая часть – это работа. Каждый студент имеет право работать ТОЛЬКО в период с 15 мая по 15 сентября, даты работы каждый студент может подбирать индивидуально, согласно планам сдачи летней сессии и личных планов, но в рамках периода 15 мая - 15 сентября." />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="В стоимость входит:" />
-
-        <TextView
-            android:id="@+id/exchange_costDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            tools:text="Помощь в оформлении документов; Медицинская страховка на срок программы Work and Travel, указанный в форме DS-2019; Проверка твоей вакансии на работу в США; Ориентационные материалы и советы по программе Work and Travel; Путеводитель по США «Открой Америку»; Информационная брошюра о программе Work and Travel; Услуги горячей телефонной линии в США" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
             android:layout_marginTop="8dp"
-            android:text=" Для подачи заявки и более побродной информации переходите по ссылке:" />
+            android:elevation="15dp"
+            app:shape_cutCorner_bottomLeftSize="10dp"
+            app:shape_cutCorner_bottomRightSize="10dp"
+            app:shape_cutCorner_topLeftSize="10dp"
+            app:shape_cutCorner_topRightSize="10dp">
 
-        <TextView
-            android:id="@+id/exchange_link"
-            android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical">
+
+                <TextView
+                    android:paddingTop="15dp"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="В стоимость входит:" />
+
+                <TextView
+                    android:textColor="@color/colorAccent"
+                    android:id="@+id/exchange_costDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    tools:text="Помощь в оформлении документов; Медицинская страховка на срок программы Work and Travel, указанный в форме DS-2019; Проверка твоей вакансии на работу в США; Ориентационные материалы и советы по программе Work and Travel; Путеводитель по США «Открой Америку»; Информационная брошюра о программе Work and Travel; Услуги горячей телефонной линии в США" />
+
+
+            </LinearLayout>
+
+        </com.github.florent37.shapeofview.shapes.CutCornerView>
+
+        <com.github.florent37.shapeofview.shapes.CutCornerView
+            android:id="@+id/reg_button_crop"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="http::some_link" />
+            android:elevation="3dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+
+            app:shape_cutCorner_bottomLeftSize="12dp"
+            app:shape_cutCorner_bottomRightSize="12dp"
+            app:shape_cutCorner_topLeftSize="12dp"
+            app:shape_cutCorner_topRightSize="12dp">
+
+            <FrameLayout
+                android:background="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageView
+                    android:id="@+id/reg_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/white_button"
+                    />
+
+                <TextView
+                    android:id="@+id/exchange_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="OFFICIAL LINK"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    />
+
+            </FrameLayout>
+
+        </com.github.florent37.shapeofview.shapes.CutCornerView>
 
     </LinearLayout>
 </ScrollView>

@@ -45,6 +45,8 @@ public class ExchangeRecyclerListFragment extends Fragment {
     List<Exchange> exchangeList;
     RecyclerView recyclerView;
     Typeface typeface;
+    TextView selectedCountiesView,selectedProgramView;
+    List<Exchange> exchange_programs, exchangeCountries;
 
     public ExchangeRecyclerListFragment() {
         // Required empty public constructor
@@ -67,7 +69,7 @@ public class ExchangeRecyclerListFragment extends Fragment {
 
         //a list to store all the exchanges
         exchangeList = new ArrayList<>();
-        List<Exchange> exchangeCountries = new ArrayList<>();
+        exchangeCountries = new ArrayList<>();
         List<Exchange> finalListProgram = new ArrayList<>();
         List<Exchange> finalListCountry = new ArrayList<>();
 
@@ -96,10 +98,10 @@ public class ExchangeRecyclerListFragment extends Fragment {
                     recyclerView.setAdapter(adapter);
 
                     ImageView filterProgramButton = view.findViewById(R.id.filter_program);
-                    TextView selectedProgramView = view.findViewById(R.id.filter_selected_programs);
+                    selectedProgramView = view.findViewById(R.id.filter_selected_programs);
                     selectedProgramView.setTypeface(typeface);
                     HashSet<String> setOfTypes = new LinkedHashSet<>();
-                    List<Exchange> exchange_programs = new ArrayList<>();
+                    exchange_programs = new ArrayList<>();
                     for (Exchange types : exchangeList) {
                         setOfTypes.add(types.getType());
                     }
@@ -181,7 +183,7 @@ public class ExchangeRecyclerListFragment extends Fragment {
 
 
                     ImageView filterCountryButton = view.findViewById(R.id.filter_country);
-                    TextView selectedCountiesView = view.findViewById(R.id.filter_selected_country);
+                    selectedCountiesView = view.findViewById(R.id.filter_selected_country);
                     selectedCountiesView.setTypeface(typeface);
                     HashSet<String> setOfCountries = new LinkedHashSet<>();
 
@@ -307,6 +309,12 @@ public class ExchangeRecyclerListFragment extends Fragment {
                 mylist.add(ex);
             }
         }
+
+        selectedCountiesView.setText("");
+        selectedProgramView.setText("");
+        exchangeCountries.clear();
+        exchange_programs.clear();
+
         recyclerView.setAdapter(new ExchangeAdapter(getContext(), mylist));
         recyclerView.getAdapter().notifyDataSetChanged();
     }

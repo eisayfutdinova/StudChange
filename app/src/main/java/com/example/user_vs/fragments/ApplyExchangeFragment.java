@@ -40,8 +40,8 @@ import javax.mail.internet.MimeMessage;
 public class ApplyExchangeFragment extends Fragment {
 
 
-    javax.mail.Session session=null;
-    ProgressDialog progressDialog=null;
+    private javax.mail.Session session=null;
+    private ProgressDialog progressDialog=null;
     Context context=null;
     String rec;
     String sub, text;

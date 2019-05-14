@@ -39,9 +39,9 @@ import java.util.stream.Collectors;
 
 public class LikedFragment extends Fragment {
 
-    List<Exchange> likedExchangeList;
-    RecyclerView recyclerView;
-    Typeface typeface;
+    private List<Exchange> likedExchangeList;
+    private RecyclerView recyclerView;
+    private Typeface typeface;
 
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

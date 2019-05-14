@@ -1,6 +1,7 @@
 package com.example.user_vs.fragments;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,8 @@ import java.util.Objects;
  * A simple {@link Fragment} subclass.
  */
 public class DetailsExchangeFragment extends Fragment {
+
+    Typeface typeface, typefaceTitle, typefaceLight;
 
 
     public DetailsExchangeFragment() {
@@ -48,6 +51,9 @@ public class DetailsExchangeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Bundle args = getArguments();
         String ex_id = args.getString("exchange_id");
+        typeface = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/Rubik-Regular.ttf");
+        typefaceTitle = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/Rubik-Bold.ttf");
+        typefaceLight = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/Rubik-Light.ttf");
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -55,10 +61,16 @@ public class DetailsExchangeFragment extends Fragment {
                 .addOnSuccessListener(queryDocSnap -> {
                     Exchange exchange = queryDocSnap.toObject(Exchange.class);
                     assert exchange != null;
+
+                    ((TextView)getActivity().findViewById(R.id.exchange_fulldescription)).setTypeface(typeface);
+                    ((TextView)getActivity().findViewById(R.id.exchange_name)).setTypeface(typefaceTitle);
+                    ((TextView)getActivity().findViewById(R.id.exchange_type)).setTypeface(typefaceLight);
+                    ((TextView)getActivity().findViewById(R.id.exchange_costDetails)).setTypeface(typefaceLight);
+
                     ((TextView) Objects.requireNonNull(getActivity()).findViewById(R.id.exchange_name)).setText(exchange.getName());
                     ((TextView)getActivity().findViewById(R.id.exchange_type)).setText(exchange.getType());
                     ((TextView)getActivity().findViewById(R.id.exchange_fulldescription)).setText(exchange.getFulldescription());
-                    ((TextView)getActivity().findViewById(R.id.exchange_link)).setText(exchange.getLink());
+                    //((TextView)getActivity().findViewById(R.id.exchange_link)).setText(exchange.getLink());
                     ((TextView)getActivity().findViewById(R.id.exchange_costDetails)).setText(exchange.getCostDetails());
                 });
 

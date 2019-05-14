@@ -37,12 +37,12 @@ import java.util.Map;
 public class ExchangeAdapter extends RecyclerView.Adapter<ExchangeAdapter.ProductViewHolder> {
     //this context we will use to inflate the layout
     private Context mCtx;
-    Typeface typeface, typefaceDesc, typefaceLight;
+    private Typeface typeface, typefaceDesc, typefaceLight;
 
     //we are storing all the products in a list
     private List<Exchange> productList;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     //getting the context and product list with constructor
     ExchangeAdapter(Context mCtx, List<Exchange> productList) {

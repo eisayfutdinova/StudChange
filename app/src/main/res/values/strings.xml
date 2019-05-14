@@ -63,4 +63,5 @@
         <item>Ukrainian</item>
         <item>Uzbek</item>
     </string-array>
+    <string name="title_activity_maps">Map</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.example.user_vs.fragments;
 
+import com.google.firebase.firestore.GeoPoint;
+
 public class Exchange{
     private String name;
     private String type;
@@ -10,19 +12,20 @@ public class Exchange{
     private String description;
     private String fulldescription;
     private String link;
+    private GeoPoint geo;
+    private String markerId;
+    private String exchangeId;
 
     public void setExchangeId(String exchangeId) {
         this.exchangeId = exchangeId;
     }
 
-    private String exchangeId;
-
     public Exchange() {
     }
 
-    public Exchange(String name,String type,String language,
-                    String cost,String costDetails,String country,
-                    String description,String fulldescription,String link, String sxchangeId) {
+    public Exchange(String name, String type, String language,
+                    String cost, String costDetails, String country,
+                    String description, String fulldescription, String link, GeoPoint geo, String sxchangeId) {
         this.name = name;
         this.type = type;
         this.language = language;
@@ -32,8 +35,11 @@ public class Exchange{
         this.description = description;
         this.fulldescription = fulldescription;
         this.link = link;
+        this.geo = geo;
         this.exchangeId = sxchangeId;
     }
+
+
 
     public String getExchangeId() {
         return exchangeId;
@@ -73,5 +79,17 @@ public class Exchange{
 
     public String getLink() {
         return link;
+    }
+
+    public GeoPoint getGeo() {
+        return geo;
+    }
+
+    public void setMarkerId(String markerId) {
+        this.markerId = markerId;
+    }
+
+    public String getMarkerId() {
+        return markerId;
     }
 }

@@ -27,7 +27,11 @@
         <item
             android:id="@+id/nav_apply_ex"
             android:icon="@drawable/add_ex_icon"
-            android:title="Создать стажировку" />
+            android:title="Предложить стажировку" />
+        <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/logout"
+            android:title="Карта" />
         />
         <item
             android:id="@+id/nav_logout"

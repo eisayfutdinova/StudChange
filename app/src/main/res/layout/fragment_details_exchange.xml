@@ -44,10 +44,10 @@
             android:layout_marginStart="6dp"
             android:elevation="5dp"
             android:layout_marginEnd="6dp"
-            app:shape_cutCorner_bottomLeftSize="10dp"
-            app:shape_cutCorner_bottomRightSize="10dp"
-            app:shape_cutCorner_topLeftSize="10dp"
-            app:shape_cutCorner_topRightSize="10dp">
+            app:shape_cutCorner_bottomLeftSize="12dp"
+            app:shape_cutCorner_bottomRightSize="12dp"
+            app:shape_cutCorner_topLeftSize="12dp"
+            app:shape_cutCorner_topRightSize="12dp">
 
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -74,12 +74,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
-            android:layout_marginTop="8dp"
-            android:elevation="15dp"
-            app:shape_cutCorner_bottomLeftSize="10dp"
-            app:shape_cutCorner_bottomRightSize="10dp"
-            app:shape_cutCorner_topLeftSize="10dp"
-            app:shape_cutCorner_topRightSize="10dp">
+            android:layout_marginTop="10dp"
+            android:elevation="3dp"
+            app:shape_cutCorner_bottomLeftSize="12dp"
+            app:shape_cutCorner_bottomRightSize="12dp"
+            app:shape_cutCorner_topLeftSize="12dp"
+            app:shape_cutCorner_topRightSize="12dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -88,6 +88,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/exchange_cost_title"
                     android:paddingTop="15dp"
                     android:textColor="@color/colorAccent"
                     android:textSize="18sp"
@@ -113,7 +114,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:elevation="3dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
             android:layout_gravity="center"
 
             app:shape_cutCorner_bottomLeftSize="12dp"
@@ -128,14 +130,14 @@
                 >
 
                 <ImageView
-                    android:id="@+id/reg_button"
+                    android:id="@+id/exchange_link"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/white_button"
                     />
 
                 <TextView
-                    android:id="@+id/exchange_link"
+                    android:id="@+id/exchange_link_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="OFFICIAL LINK"

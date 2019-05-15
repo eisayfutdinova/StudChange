@@ -103,7 +103,6 @@ public class RegisterFragment extends Fragment {
             if (email.isEmpty() || password.isEmpty() || name.isEmpty() || !password.equals(password2)) {
                 showMessage("Please, verify all fields correctly");
                 buttonClickTrue();
-                regButton.setVisibility(View.VISIBLE);
                 loadingProgress.setVisibility(View.INVISIBLE);
             } else {
                 //creating users acount
@@ -140,9 +139,10 @@ public class RegisterFragment extends Fragment {
                 updateUserInfo(name, pickedImgUri, fbAuth.getCurrentUser());
 
             } else {
-                showMessage("Account creation failed" + task.getException().getMessage());
+                showMessage("Account creation failed. " + task.getException().getMessage());
                 regButton.setVisibility(View.VISIBLE);
-                loadingProgress.setVisibility(View.VISIBLE);
+                loadingProgress.setVisibility(View.INVISIBLE);
+                buttonClickTrue();
             }
         });
 
